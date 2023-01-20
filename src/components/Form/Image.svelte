@@ -37,7 +37,7 @@
   />
 
   {#if value && !loading}
-    <img class="w-48 max-h-[230px] rounded border object-fit" src={value} alt="" />
+    <img class="h-40  rounded border object-fit" src={value} alt="" />
   {/if}
 
   {#if loading}
@@ -51,4 +51,13 @@
     on:change={(e) => onFileSelected(e)}
     bind:this={fileinput}
   />
+  <button
+        class="bg-red-600 hover:bg-red-700 text-white  mb-2 border rounded font-bold text-xs px-4 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 "
+        type="button"
+        on:click={() => value=null}
+      >
+        <i class="fa fa-trash" />
+        Sil
+      </button>
 </div>
+

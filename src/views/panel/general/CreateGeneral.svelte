@@ -6,9 +6,9 @@
   import Input from "$components/Form/Input.svelte";
   import Select from "$components/Form/Select.svelte";
   import Image from "$components/Form/Image.svelte";
+  import Textarea from "$components/Form/Textarea.svelte";
 
   let values = [
-    { key: "lang", customValue: null },
     { key: "lang", customValue: null },
     { key: "phone1", customValue: null },
     { key: "phone2", customValue: null },
@@ -21,8 +21,6 @@
     { key: "youtube", customValue: null },
     { key: "whatsapp", customValue: null },
     { key: "copright", customValue: null },
-    { key: "weekend", customValue: null },
-    { key: "weekday", customValue: null },
     { key: "shortDesc", customValue: null },
     { key: "logo1", customValue: null },
     { key: "logo2", customValue: null },
@@ -116,13 +114,13 @@
                 class="block  text-blueGray-600 text-xs font-bold mb-2"
                 for="grid-name"
               >
-                Klinik İsmi
+                Şirket İsmi
               </label>
 
               <Input
                 bind:value={general.brand.value}
                 bind:isValid={general.brand.isValid}
-                placeholder={"Klinik İsmi"}
+                placeholder={"Şirket İsmi"}
                 required={true}
               />
             </div>
@@ -296,36 +294,19 @@
               />
             </div>
           </div>
-          <div class="w-full lg:w-3/12 px-4">
+          <div class="w-full lg:w-6/12 px-4">
             <div class="relative w-full mb-3">
               <label
                 class="block  text-blueGray-600 text-xs font-bold mb-2"
                 for="grid-name"
               >
-                Hafta İçi Saat
+                Kısa Açıklama
               </label>
 
-              <Input
-                bind:value={general.weekday.value}
-                bind:isValid={general.weekday.isValid}
-                placeholder={" Hafta İçi Saat"}
-                required={true}
-              />
-            </div>
-          </div>
-          <div class="w-full lg:w-3/12 px-4">
-            <div class="relative w-full mb-3">
-              <label
-                class="block  text-blueGray-600 text-xs font-bold mb-2"
-                for="grid-name"
-              >
-                Hafta Sonu Saat
-              </label>
-
-              <Input
-                bind:value={general.weekend.value}
-                bind:isValid={general.weekend.isValid}
-                placeholder={"Hafta Sonu Saat"}
+              <Textarea
+                bind:value={general.shortDesc.value}
+                bind:isValid={general.shortDesc.isValid}
+                placeholder={"Kısa Açıklama (Footer vb)"}
                 required={true}
               />
             </div>
@@ -347,23 +328,7 @@
               />
             </div>
           </div>
-          <div class="w-full lg:w-12/12 px-4">
-            <div class="relative w-full mb-3">
-              <label
-                class="block  text-blueGray-600 text-xs font-bold mb-2"
-                for="grid-name"
-              >
-                Kısa Açıklama
-              </label>
-
-              <Input
-                bind:value={general.shortDesc.value}
-                bind:isValid={general.shortDesc.isValid}
-                placeholder={"Kısa Açıklama (Footer vb)"}
-                required={true}
-              />
-            </div>
-          </div>
+      
      
           <div class="w-full lg:w-6/12 px-4">
             <div class="border relative w-full h-40 mb-3">

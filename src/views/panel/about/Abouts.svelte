@@ -6,6 +6,8 @@
   import Select from "$components/Form/Select.svelte";
   import { bind } from "svelte-simple-modal";
   import Alert from "$components/Alert.svelte";
+  import {modal} from "$services/store";
+
   const deleteAboutApprove = (aboutId) => {
     modal.set(
       bind(Alert, {
@@ -26,11 +28,7 @@
   let limit = 10;
   let skip = 0;
   let totalDataCount = 0;
-  const getLangs = async () => {
-    let response = await RestService.getLangs(undefined, undefined);
-    langs = response["langs"];
-  };
-  getLangs();
+
   const getAbouts = async () => {
     let response = await RestService.getAbouts(limit, skip, lang);
     abouts = response["abouts"];

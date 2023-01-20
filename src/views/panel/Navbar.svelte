@@ -31,7 +31,7 @@
         <a
           href="/panel/dashboard"
           use:link
-          class="md:hidden text-white font-bold">Side-dental</a
+          class="md:hidden text-white font-bold">Sanitas</a
         >
         <button
           on:click={() => (navbarOpen = !navbarOpen)}
@@ -54,7 +54,7 @@
             <div
               class="flex flex-col md:flex-row text-white font-bold mb-4 md:mb-0 w-3/12"
             >
-              Side-dental Panel
+              Sanitas Panel
             </div>
             <div
               class="flex flex-col md:flex-row flex-wrap gap-2 items-center justify-center lg:px-44"
@@ -84,7 +84,7 @@
               >
                 Slider
               </a>
-              <a
+              <!-- <a
                 class="text-white font-semibold text-sm {$location.pathname.indexOf(
                   'home'
                 ) !== -1
@@ -95,7 +95,19 @@
                 on:click={() => (navbarOpen = false)}
               >
                 AnaSayfa
-              </a>
+              </a> -->
+              <a
+              class="text-white font-semibold text-sm {$location.pathname.indexOf(
+                'feature'
+              ) !== -1
+                ? 'hover:text-white text-base'
+                : 'text-white/80 hover:text-white'}"
+              href="/panel/features"
+              use:link
+              on:click={() => (navbarOpen = false)}
+            >
+              Özellikler
+            </a>
               <a
                 class="text-white font-semibold text-sm {$location.pathname.indexOf(
                   'about'
@@ -108,8 +120,19 @@
               >
                 Hakkımızda
               </a>
-
               <a
+              class="text-white font-semibold text-sm {$location.pathname.indexOf(
+                'group'
+              ) !== -1
+                ? 'hover:text-white text-base'
+                : 'text-white/80 hover:text-white'}"
+              href="/panel/groups"
+              use:link
+              on:click={() => (navbarOpen = false)}
+            >
+              Tedavi Grupları
+            </a>
+              <!-- <a
                 class="text-white font-semibold text-sm {$location.pathname.indexOf(
                   'treatments_page'
                 ) !== -1
@@ -120,7 +143,7 @@
                 on:click={() => (navbarOpen = false)}
               >
                 Tedavi Sayfası
-              </a>
+              </a> -->
               <a
                 class="text-white font-semibold text-sm {$location.pathname.indexOf(
                   'treatment'
@@ -131,7 +154,7 @@
                 use:link
                 on:click={() => (navbarOpen = false)}
               >
-                Tedavi
+                Tedaviler
               </a>
               <a
                 class="text-white font-semibold text-sm {$location.pathname.indexOf(

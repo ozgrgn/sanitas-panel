@@ -2,41 +2,35 @@
   import RestService from "$services/rest.js";
   import ToastService from "$services/toast";
   import { Translate, TranslateApiMessage } from "$services/language.js";
-  import { onMount } from "svelte";
-  import {lang} from "$services/store.js";
   import { navigate } from "svelte-navigator";
   import Input from "$components/Form/Input.svelte";
-  import Textarea from "$components/Form/Textarea.svelte";
-  import NumberInput from "$components/Form/NumberInput.svelte";
-  import Image from "$components/Form/Image.svelte";
   import Select from "$components/Form/Select.svelte";
-  import Switch from "$components/Switch.svelte";
+  import ImageArray from "$components/Form/ImageArray.svelte";
+  import Textarea from "$components/Form/Textarea.svelte";
+  import TextEditor from "$components/Form/TextEditor.svelte";
+  import Image from "$components/Form/Image.svelte";
 
   let values = [
     { key: "lang", customValue: null },
-    { key: "title1", customValue: null },
-    { key: "title2", customValue: null },
+    { key: "title", customValue: null },
     { key: "description", customValue: null },
-    { key: "order", customValue: null },
-    { key: "isActive", customValue: null },
-    { key: "backgroundBanner", customValue: null },
-    { key: "mobileBanner", customValue: null },
+    { key: "svg", customValue: null },
+    { key: "perma", customValue: null },
+    { key: "text", customValue: null },
+    { key: "image", customValue: null },
   ];
 
-  let slider = {};
+  let feature = {};
+
 
   values.map((v) => {
     if (v.defaultValue) {
-      slider[v.key] = { value: v.defaultValue };
+      feature[v.key] = { value: v.defaultValue };
     } else {
-      slider[v.key] = {};
+      feature[v.key] = {};
     }
   });
-
-  onMount(() => {
-
-  });
-let langs;
+  let langs;
   const getLangs = async () => {
     let response = await RestService.getLangs(undefined, undefined);
     langs = response["langs"];
@@ -44,18 +38,18 @@ let langs;
   };
   getLangs();
 
-  const addSlider = async () => {
-    console.log(slider,"slider")
+  const addFeature = async () => {
     let data = {};
     values.map((v) => {
-      data[v.key] = slider[v.key]?.value;
+      if (feature[v.key].value) {
+        data[v.key] = feature[v.key]?.value;
+      }
     });
-    let response = await RestService.addSlider(data);
-    console.log(data,"data")
+    let response = await RestService.addFeature(data);
     if (response["status"]) {
       ToastService.success($Translate("Successfully-completed"));
 
-      navigate("/panel/sliders");
+      navigate("/panel/features");
     } else {
       ToastService.error($TranslateApiMessage(response.message));
     }
@@ -68,7 +62,7 @@ let langs;
       class="bg-white text-blue-600 hover:text-red-700 mb-2 border rounded font-bold  text-xs px-4 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 "
       type="button"
       on:click={() => {
-        navigate("/panel/sliders");
+        navigate("/panel/features");
       }}
     >
       <i class="fa fa-arrow-left" />
@@ -79,7 +73,7 @@ let langs;
     >
       <div class="rounded-t mb-0 px-4 py-3 border-0">
         <div class="text-center flex justify-between">
-          <h3 class="font-semibold text-lg text-blueGray-700">Slider ekle</h3>
+          <h3 class="font-semibold text-lg text-blueGray-700">Özellik ekle</h3>
         </div>
       </div>
       <div class="flex-auto px-4 lg:px-10 py-10 pt-0">
@@ -94,142 +88,125 @@ let langs;
               </label>
               {#if langs}
               <Select
-              bind:value={slider.lang.value}
-              values={langs}
-              title={"Dil Seçin"}
-              valuesKey={"lang"}
-              valuesTitleKey={"title"}
-              customClass={"w-full"}
-            />
-            {/if}
+                bind:value={feature.lang.value}
+                bind:isValid={feature.lang.isValid}
+                values={langs}
+                title={"Dil Seçin"}
+                valuesKey={"lang"}
+                valuesTitleKey={"title"}
+                customClass={"w-full"}
+              />
+              {/if}
             </div>
           </div>
+        </div>
+        <div class="flex flex-wrap my-4">
           <div class="w-full lg:w-3/12 px-4">
             <div class="relative w-full mb-3">
               <label
                 class="block  text-blueGray-600 text-xs font-bold mb-2"
                 for="grid-name"
               >
-                Sıra
+                Başlık
               </label>
-
-              <NumberInput
-                bind:value={slider.order.value}
-                bind:isValid={slider.order.isValid}
-                placeholder={"Sıra"}
+              <Input
+                bind:value={feature.title.value}
+                bind:isValid={feature.title.isValid}
+                placeholder={"Özellik Başlığı"}
                 required={true}
               />
             </div>
           </div>
-          <div class="w-full lg:w-6/12 px-4">
+          <div class="w-full lg:w-7/12 px-4">
             <div class="relative w-full mb-3">
               <label
                 class="block  text-blueGray-600 text-xs font-bold mb-2"
-                for="rectangleBanner"
+                for="grid-name"
               >
-                Aktif mi ?
+                Kısa Açıklama
               </label>
-
-              <Switch bind:value={slider.isActive.value} />
+              <Input
+                bind:value={feature.description.value}
+                bind:isValid={feature.description.isValid}
+                placeholder={"Kısa Açıklama"}
+                required={true}
+              />
             </div>
           </div>
+          <div class="w-full lg:w-2/12 px-4">
+            <div class="relative w-full mb-3">
+              <label
+                class="block  text-blueGray-600 text-xs font-bold mb-2"
+                for="grid-name"
+              >
+                Perma (url path)
+              </label>
+              <Input
+                bind:value={feature.perma.value}
+                bind:isValid={feature.perma.isValid}
+                placeholder={"Yönlenecek sayfa"}
+                required={false}
+              />
+            </div>
+          </div>
+        </div>
+        <div class="flex flex-wrap my-4">
           <div class="w-full lg:w-6/12 px-4">
             <div class="relative w-full mb-3">
               <label
                 class="block  text-blueGray-600 text-xs font-bold mb-2"
                 for="grid-name"
               >
-                Slider Başlık 1
+                SVG Kodu
               </label>
-
-              <Input
-                bind:value={slider.title1.value}
-                bind:isValid={slider.title1.isValid}
-                placeholder={"Başlık"}
+              <Textarea
+                bind:value={feature.svg.value}
+                bind:isValid={feature.svg.isValid}
+                placeholder={"SVG Kodu"}
                 required={true}
               />
             </div>
           </div>
           <div class="w-full lg:w-6/12 px-4">
-            <div class="relative w-full mb-3">
+            <div class=" relative w-full h-40 mb-3">
               <label
-                class="block  text-blueGray-600 text-xs font-bold mb-2"
-                for="grid-name"
+                class="block text-blueGray-600 text-xs font-bold mb-2"
+                for="backgroundBanner"
               >
-                Slider Başlık 2
+                Sayfa var ise resim
               </label>
-
-              <Input
-                bind:value={slider.title2.value}
-                bind:isValid={slider.title2.isValid}
-                placeholder={"Başlık"}
-                required={true}
-              />
+              <div class="flex h-full border flex-col justify-center my-2">
+                <Image
+                  bind:value={feature.image.value}
+                  bind:isValid={feature.image.isValid}
+                />
+              </div>
             </div>
           </div>
+        </div>
+        <div class="flex flex-wrap">
           <div class="w-full lg:w-12/12 px-4">
             <div class="relative w-full mb-3">
               <label
                 class="block  text-blueGray-600 text-xs font-bold mb-2"
                 for="grid-name"
               >
-                Slider Metin
+                Text
               </label>
 
-              <Input
-                bind:value={slider.description.value}
-                bind:isValid={slider.description.isValid}
-                placeholder={"Metin"}
-                required={true}
+              <TextEditor
+                placeholder={"Text"}
+                bind:value={feature.text.value}
+
               />
             </div>
-          
           </div>
-   
-
-          <div class="w-full lg:w-6/12 px-4">
-            <div class="border relative w-full h-72 mb-3">
-              <label
-                class="block text-blueGray-600 text-xs font-bold mb-2"
-                for="backgroundBanner"
-              >
-                Arka plan banner
-              </label>
-              <div class="flex h-full flex-col justify-center my-2">
-                <Image
-                  bind:value={slider.backgroundBanner.value}
-                  bind:isValid={slider.backgroundBanner.isValid}
-                />
-              </div>
-            </div>
-          </div>
-   
-          <div class="w-full lg:w-6/12 px-4">
-            <div class="border relative w-full h-72 mb-3">
-              <label
-                class="block text-blueGray-600 text-xs font-bold mb-2"
-                for="rectangleBanner"
-              >
-                Mobile Banner
-              </label>
-              <div class="flex h-full flex-col justify-center my-2">
-                <Image
-                  bind:value={slider.mobileBanner.value}
-                  bind:isValid={slider.mobileBanner.isValid}
-                />
-              </div>
-            </div>
-          </div>
-   
         </div>
-
         <div class="flex flex-wrap">
           <div class="w-full lg:w-12/12 px-4 text-right mt-2">
             <button
-              on:click={addSlider}
-              disabled={!slider.title1.isValid ||
-                !slider.description.isValid ||
-                !slider.order.isValid}
+              on:click={addFeature}
+              disabled={!feature.lang.isValid || feature.lang.value == null}
               class="bg-blue-600 disabled:bg-red-300 text-white active:bg-bred-400 font-bold  text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 "
               type="button"
             >

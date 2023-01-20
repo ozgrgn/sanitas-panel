@@ -5,16 +5,16 @@
   import ToastService from "$services/toast";
   import Select from "$components/Form/Select.svelte";
   import { bind } from "svelte-simple-modal";
-  import Alert from "$components/Alert.svelte";
   import {modal} from "$services/store";
 
-  const deleteHomeApprove = (homeId) => {
+  import Alert from "$components/Alert.svelte";
+  const deleteGroupApprove = (groupId) => {
     modal.set(
       bind(Alert, {
         message: "Bu işlemi onaylıyor musunuz ?",
         answer: (message) => {
           if (message) {
-            deleteHome(homeId);
+            deleteGroup(groupId);
           }
           modal.set(null);
         },
@@ -22,30 +22,30 @@
     );
   };
 
-  let homes;
+  let groups;
   let langs;
   let lang;
   let limit = 10;
   let skip = 0;
   let totalDataCount = 0;
-  const getLang = async () => {
-    let response = await RestService.getLangs(undefined,undefined);
+  const getLangs = async () => {
+    let response = await RestService.getLangs(undefined, undefined);
     langs = response["langs"];
-}
-getLang();
-  const getHomes = async () => {
-    let response = await RestService.getHomes(limit, skip, lang);
-    homes = response["homes"];
-    console.log(homes,"homes")
+  };
+  getLangs();
+  const getGroups = async () => {
+    let response = await RestService.getGroups(limit, skip, lang);
+    groups = response["groups"];
+    console.log(groups, "groups");
     totalDataCount = response["count"];
   };
-  getHomes();
+  getGroups();
 
-  const deleteHome = async (homeId) => {
-    let response = await RestService.deleteHome(homeId);
+  const deleteGroup = async (groupId) => {
+    let response = await RestService.deleteGroup(groupId);
     if (response["status"]) {
       ToastService.success($Translate("Successfully-deleted"));
-      getHomes();
+      getGroups();
     } else {
       ToastService.error($TranslateApiMessage(response.message));
     }
@@ -53,7 +53,7 @@ getLang();
   const ceilAndCalculate = () => {
     if (Math.ceil(skip / limit) != Math.ceil(totalDataCount / limit) - 1) {
       skip = skip + limit;
-      getHomes();
+      getGroups();
     }
   };
 
@@ -74,7 +74,7 @@ getLang();
       class="bg-white text-blue-600 hover:text-red-700 mb-2 border rounded font-bold  text-xs px-4 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 "
       type="button"
       on:click={() => {
-        navigate("/panel/create-home");
+        navigate("/panel/create-group");
       }}
     >
       <i class="fa fa-plus" />
@@ -87,12 +87,12 @@ getLang();
       <div class="rounded-t mb-0 px-4 py-3 border-0">
         <div class="flex flex-wrap items-center">
           <div class="relative w-full px-4 max-w-full flex-grow flex-1">
-            <h3 class="font-semibold text-lg text-blueGray-700">Anasayfa</h3>
+            <h3 class="font-semibold text-lg text-blueGray-700">Tedavi Grupları</h3>
           </div>
         </div>
       </div>
       <div class="block w-full overflow-x-auto">
-        {#if homes}
+        {#if groups}
           <table class="items-center w-full bg-transparent border-collapse">
             <thead>
               <tr>
@@ -102,9 +102,16 @@ getLang();
                     ? 'bg-blueGray-50 text-blueGray-500 border-blueGray-100'
                     : 'bg-red-700 text-red-200 border-red-600'}"
                 >
-               Dil
+                  Dil
                 </th>
-       
+                <th
+                class="px-6 align-middle border border-solid py-3 text-xs border-l-0 border-r-0 whitespace-nowrap font-semibold  {color ===
+                'light'
+                  ? 'bg-blueGray-50 text-blueGray-500 border-blueGray-100'
+                  : 'bg-red-700 text-red-200 border-red-600'}"
+              >
+                Başlık
+              </th>
 
                 <th
                   class="px-6 align-middle border border-solid py-3 text-xs  border-l-0 border-r-0 whitespace-nowrap font-semibold  {color ===
@@ -115,14 +122,18 @@ getLang();
               </tr>
             </thead>
             <tbody>
-              {#each homes as home}
+              {#each groups as group}
                 <tr>
                   <td
                     class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center"
                   >
-                    {home.lang}
+                    {group.lang}
                   </td>
-                
+                  <td
+                  class="border-t-0 px-6 border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center"
+                >
+                  {group.title}
+                </td>
                   <td
                     class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center"
                   >
@@ -130,14 +141,13 @@ getLang();
                       class="bg-white text-blue-600 hover:bg-blue-600 hover:text-white border border-blue-600 rounded font-bold  text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none "
                       type="button"
                       on:click={navigate(
-                        `/panel/update-home/${home._id.toString()}`
+                        `/panel/update-group/${group._id.toString()}`
                       )}
                     >
                       {$Translate("Edit")}
                     </button>
                     <button
-                      on:click={() =>
-                        deleteHomeApprove(home._id.toString())}
+                      on:click={() => deleteGroupApprove(group._id.toString())}
                       class="bg-white text-blue-600 hover:bg-blue-600 hover:text-white border border-blue-600 rounded font-bold  text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none "
                       type="button"
                     >
@@ -151,14 +161,14 @@ getLang();
         {/if}
       </div>
       <hr class="my-4 md:min-w-full" />
-      {#if homes}
+      {#if groups}
         <div
           class="flex flex-row flex-wrap lg:flex-nowrap w-full gap-1 justify-center lg:justify-end items-center p-3"
         >
           <Select
             bind:value={limit}
             change={() => {
-              getHomes();
+              getGroups();
             }}
             values={[
               { limit: 10 },
@@ -177,7 +187,7 @@ getLang();
             type="button"
             on:click={() => {
               skip != 0 ? (skip = skip - limit) : (skip = skip);
-              getHomes();
+              getGroups();
             }}
           >
             {$Translate("Prev")}
@@ -191,7 +201,7 @@ getLang();
               type="button"
               on:click={() => {
                 skip = limit * i;
-                getHomes();
+                getGroups();
               }}
             >
               {i + 1}

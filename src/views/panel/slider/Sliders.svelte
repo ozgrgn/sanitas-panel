@@ -5,6 +5,8 @@
   import ToastService from "$services/toast";
   import Select from "$components/Form/Select.svelte";
   import { bind } from "svelte-simple-modal";
+  import {modal} from "$services/store";
+
   import Alert from "$components/Alert.svelte";
   const deleteSliderApprove = (sliderId) => {
     modal.set(
@@ -147,7 +149,7 @@ getLang();
                   <td
                     class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center"
                   >
-                    {slider.title}
+                    {slider.title1}
                   </td>
                   <td
                     class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center"

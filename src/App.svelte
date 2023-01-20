@@ -3,14 +3,12 @@
   import { SvelteToast } from "@zerodevx/svelte-toast";
   import { Route, Router, navigate } from "svelte-navigator";
   import AdminRoute from "./views/panel/Route.svelte";
-  import DesktopRoutes from "./views/desktop/Route.svelte";
-  import MobileRoutes from "./views/mobile/Route.svelte";
   import Auth from "./views/auth/Auth.svelte";
   import { onDestroy } from "svelte";
   import RestService from "./services/rest";
   import { isDesktop } from "$services/utils";
+  import { user } from "$services/store";
 
-  getTreatments();
   if (
     window.location.pathname == "/auth/login" ||
     window.location.pathname == "/panel" ||
@@ -45,8 +43,6 @@
     });
   }
 
-  let browserLang = navigator.language || navigator.userLanguage;
-  if (!$lang) lang.set(browserLang.split("-")[0]);
 </script>
 
 
@@ -56,9 +52,5 @@
   <Route path="auth/*auth" component={Auth} />
 
   <Route path="panel/*" component={AdminRoute} />
-  {#if isDesktop()}
-    <Route component={DesktopRoutes} />
-  {:else}
-    <Route component={MobileRoutes} />
-  {/if}
+
 </Router>

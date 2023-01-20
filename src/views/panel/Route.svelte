@@ -38,6 +38,12 @@
   import Translates from "./translate/Translates.svelte";
   import { modal } from "../../services/store";
   import Modal from "svelte-simple-modal";
+  import CreateFeatures from "./features/CreateFeatures.svelte";
+  import Features from "./features/Features.svelte";
+  import UpdateFeatures from "./features/UpdateFeatures.svelte";
+  import UpdateGroups from "./group/UpdateGroups.svelte";
+  import CreateGroup from "./group/CreateGroup.svelte";
+  import Groups from "./group/Groups.svelte";
   // let userAuthSubscription = user.subscribe(async (auth) => {
   //   if (!auth) {
   //     navigate("/auth/login");
@@ -66,6 +72,7 @@
   //   userAuthSubscription;
   // });
 </script>
+
 <Modal show={$modal} />
 <div>
   <!-- <Sidebar /> -->
@@ -100,14 +107,21 @@
         <Route path="create-home" component={CreateHome} />
 
         <Route path="homes" component={Homes} />
+
+        <!-- Özellikler -->
+        <Route path="update-feature/:featureId" component={UpdateFeatures} />
+
+        <Route path="create-feature" component={CreateFeatures} />
+
+        <Route path="features" component={Features} />
+
         <!-- Hakkımızda -->
         <Route path="update-about/:aboutId" component={UpdateAbout} />
 
         <Route path="create-about" component={CreateAbout} />
 
         <Route path="abouts" component={Abouts} />
-      
-        
+
         <!-- Tedavi-Sayfası -->
         <Route
           path="update-treatmentpage/:treatments_pageId"
@@ -130,7 +144,10 @@
 
         <Route path="generals" component={Generals} />
         <!-- Çeviriler -->
-        <Route path="update-translate/:translateId" component={UpdateTranslate} />
+        <Route
+          path="update-translate/:translateId"
+          component={UpdateTranslate}
+        />
 
         <Route path="create-translate" component={CreateTranslate} />
 
@@ -151,6 +168,12 @@
         <Route path="create-treatment" component={CreateTreatment} />
 
         <Route path="treatments" component={Treatments} />
+        <!-- Groups -->
+        <Route path="update-group/:groupId" component={UpdateGroups} />
+
+        <Route path="create-group" component={CreateGroup} />
+
+        <Route path="groups" component={Groups} />
       </Router>
 
       <FooterAdmin />

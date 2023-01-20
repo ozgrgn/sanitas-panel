@@ -105,6 +105,38 @@ const deleteHome = (homeId) => {
   return Http.delete(`${ENV.API_URL}/home/${homeId}`);
 };
 
+//FEATURES
+const getFeatures = (limit, skip, lang) => {
+  let data = {};
+  if (limit) {
+    data.limit = limit;
+  }
+  if (skip) {
+    data.skip = skip;
+  }
+  if (lang) {
+    data.lang = lang;
+  }
+  return Http.get(`${ENV.API_URL}/feature`, { ...data });
+};
+const addFeature = (data) => {
+  return Http.post(`${ENV.API_URL}/feature`, data);
+};
+
+const updateFeature = (featureId, data) => {
+  return Http.put(`${ENV.API_URL}/feature/${featureId}`, {
+    feature: data,
+  });
+};
+
+
+const getFeature = (featureId) => {
+  return Http.get(`${ENV.API_URL}/feature/${featureId}`);
+};
+
+const deleteFeature = (featureId) => {
+  return Http.delete(`${ENV.API_URL}/feature/${featureId}`);
+};
 // Abouts
 const getAbouts = (limit, skip, lang) => {
   let data = {};
@@ -208,6 +240,40 @@ const getTreatmentPage = (treatmentPageId) => {
 const deleteTreatmentPage = (treatmentPageId) => {
   return Http.delete(`${ENV.API_URL}/treatmentPage/${treatmentPageId}`);
 };
+// Groups
+const getGroups = (limit, skip, lang) => {
+  let data = {};
+  if (limit) {
+    data.limit = limit;
+  }
+  if (skip) {
+    data.skip = skip;
+  }
+  if (lang) {
+    data.lang = lang;
+  }
+  return Http.get(`${ENV.API_URL}/group`, { ...data });
+};
+const addGroup = (data) => {
+  return Http.post(`${ENV.API_URL}/group`, data);
+};
+
+const updateGroup = (groupId, data) => {
+  return Http.put(`${ENV.API_URL}/group/${groupId}`, {
+    group: data,
+  });
+};
+
+const getGroup = (groupId) => {
+  return Http.get(`${ENV.API_URL}/group/${groupId}`);
+};
+
+const deleteGroup = (groupId) => {
+  return Http.delete(`${ENV.API_URL}/group/${groupId}`);
+};
+
+
+
 // Contacts
 const getContacts = (limit, skip, lang) => {
   let data = {};
@@ -396,6 +462,13 @@ export default {
   updateHome,
   deleteHome,
 
+  //Feature
+  getFeatures,
+  getFeature,
+  addFeature,
+  updateFeature,
+  deleteFeature,
+
   //about
   getAbouts,
   getAbout,
@@ -417,24 +490,30 @@ export default {
   updateTreatment,
   deleteTreatment,
   getTreatmentViaPerma,
-
+  
+  //group
+  getGroups,
+  getGroup,
+  addGroup,
+  updateGroup,
+  deleteGroup,
   //contact
   getContacts,
   getContact,
   addContact,
   updateContact,
   deleteContact,
-  
+
   //general
   getGenerals,
   getGeneral,
   addGeneral,
   updateGeneral,
   deleteGeneral,
-    //translate
-    getTranslates,
-    getTranslate,
-    addTranslate,
-    updateTranslate,
-    deleteTranslate,
+  //translate
+  getTranslates,
+  getTranslate,
+  addTranslate,
+  updateTranslate,
+  deleteTranslate,
 };

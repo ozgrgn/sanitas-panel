@@ -1,4 +1,4 @@
 const env = {
-    API_URL: "https://sanitas-api.herokuapp.com",
+    API_URL: "https://sanitas-backend.herokuapp.com",
 };
 export default env

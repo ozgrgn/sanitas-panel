@@ -6,6 +6,8 @@
   import Select from "$components/Form/Select.svelte";
   import { bind } from "svelte-simple-modal";
   import Alert from "$components/Alert.svelte";
+  import {modal} from "$services/store";
+
   const deleteContactApprove = (contactId) => {
     modal.set(
       bind(Alert, {

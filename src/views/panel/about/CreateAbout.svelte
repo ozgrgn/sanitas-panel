@@ -7,15 +7,15 @@
   import Select from "$components/Form/Select.svelte";
   import ImageArray from "$components/Form/ImageArray.svelte";
   import Textarea from "$components/Form/Textarea.svelte";
+  import { modal } from "$services/store";
+  import TextEditor from "$components/Form/TextEditor.svelte";
 
   let values = [
     { key: "lang", customValue: null },
-    { key: "about_spot", customValue: null },
     { key: "about_title", customValue: null },
     { key: "about_left", customValue: null },
     { key: "about_right", customValue: null },
     { key: "images", customValue: null },
-    { key: "logos", customValue: null },
   ];
 
   let about = {};
@@ -30,7 +30,11 @@
     logos.splice(index, 1);
     logos = logos;
   };
-
+  const getLangs = async () => {
+    let response = await RestService.getLangs(undefined, undefined);
+    langs = response["langs"];
+  };
+  getLangs();
   values.map((v) => {
     if (v.defaultValue) {
       about[v.key] = { value: v.defaultValue };
@@ -39,14 +43,14 @@
     }
   });
 
-
   const addAbout = async () => {
     let data = {};
     data.images = images;
     data.logos = logos;
     values.map((v) => {
       if (about[v.key].value) {
-      data[v.key] = about[v.key]?.value;}
+        data[v.key] = about[v.key]?.value;
+      }
     });
     let response = await RestService.addAbout(data);
     if (response["status"]) {
@@ -104,23 +108,7 @@
           </div>
         </div>
         <div class="flex flex-wrap my-4">
-          <div class="w-full lg:w-3/12 px-4">
-            <div class="relative w-full mb-3">
-              <label
-                class="block  text-blueGray-600 text-xs font-bold mb-2"
-                for="grid-name"
-              >
-                Spot
-              </label>
-              <Input
-                bind:value={about.about_spot.value}
-                bind:isValid={about.about_spot.isValid}
-                placeholder={"Hakkımızda Spot"}
-                required={true}
-              />
-            </div>
-          </div>
-          <div class="w-full lg:w-9/12 px-4">
+          <div class="w-full lg:w-6/12 px-4">
             <div class="relative w-full mb-3">
               <label
                 class="block  text-blueGray-600 text-xs font-bold mb-2"
@@ -136,33 +124,31 @@
               />
             </div>
           </div>
-        </div>
-        <div class="flex flex-wrap my-4">
           <div class="w-full lg:w-6/12 px-4">
             <div class="relative w-full mb-3">
               <label
                 class="block  text-blueGray-600 text-xs font-bold mb-2"
                 for="grid-name"
               >
-                Text Sol
+                Kısa Açıklama
               </label>
 
               <Textarea
-                placeholder={"Text 1"}
+                placeholder={"Kısa Açıklama Yukarısı İçin"}
                 bind:value={about.about_left.value}
               />
             </div>
           </div>
-          <div class="w-full lg:w-6/12 px-4">
+          <div class="w-full lg:w-12/12 px-4">
             <div class="relative w-full mb-3">
               <label
                 class="block  text-blueGray-600 text-xs font-bold mb-2"
                 for="grid-name"
               >
-                Text Sağ
+                Uzun Açıklama
               </label>
-              <Textarea
-                placeholder={"Text 2"}
+              <TextEditor
+                placeholder={"Uzun Açıklama Sayfanın Altı İçin"}
                 bind:value={about.about_right.value}
               />
             </div>
@@ -200,39 +186,6 @@
               type="button"
             >
               Hakkımızda Resmi Ekle
-            </button>
-          </div>
-          <div class="lg:w-6/12 px-4">
-            <div class="">
-              <div class=" ">
-                {#each logos as logo, index}
-                  <div class="border mt-2 p-1 grid grid-flow-col">
-                    <span
-                      class="px-2 flex flex-col justify-center text-blueGray-600 text-xs font-bold"
-                      >{index + 1}.{"Resim"}</span
-                    >
-                    <div class="col-span-2">
-                      <ImageArray bind:value={logo.image} />
-                    </div>
-                    <div class="flex flex-col justify-center items-end">
-                      <button
-                        on:click={() => deleteLogo(index)}
-                        class="w-14 bg-red-500 hover:bg-red-600 text-white font-bold text-xs m-2 px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none"
-                        type="button"
-                      >
-                        SİL
-                      </button>
-                    </div>
-                  </div>
-                {/each}
-              </div>
-            </div>
-            <button
-              on:click={() => (logos = [...logos, { image: null }])}
-              class=" mt-2 bg-red-400 disabled:bg-red-300 text-white active:bg-blue-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none ease-linear transition-all duration-150"
-              type="button"
-            >
-              Logo Ekle
             </button>
           </div>
         </div>
