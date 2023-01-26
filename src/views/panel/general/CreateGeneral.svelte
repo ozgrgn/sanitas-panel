@@ -342,6 +342,8 @@
                 <Image
                   bind:value={general.logo1.value}
                   bind:isValid={general.logo1.isValid}
+                  customClass="h-20"
+
                 />
               </div>
             </div>
@@ -358,6 +360,8 @@
                 <Image
                   bind:value={general.logo2.value}
                   bind:isValid={general.logo2.isValid}
+                  customClass="h-20"
+
                 />
               </div>
             </div>
@@ -372,6 +376,7 @@
               </label>
               <div class="flex h-full flex-col justify-center my-2">
                 <Image
+                customClass="h-20"
                   bind:value={general.map1.value}
                   bind:isValid={general.map1.isValid}
                 />
@@ -388,6 +393,7 @@
               </label>
               <div class="flex h-full flex-col justify-center my-2">
                 <Image
+                customClass="h-20"
                   bind:value={general.map2.value}
                   bind:isValid={general.map2.isValid}
                 />

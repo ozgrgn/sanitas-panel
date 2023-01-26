@@ -41,7 +41,7 @@
   import CreateFeatures from "./features/CreateFeatures.svelte";
   import Features from "./features/Features.svelte";
   import UpdateFeatures from "./features/UpdateFeatures.svelte";
-  import UpdateGroups from "./group/UpdateGroups.svelte";
+  import UpdateGroup from "./group/UpdateGroup.svelte";
   import CreateGroup from "./group/CreateGroup.svelte";
   import Groups from "./group/Groups.svelte";
   // let userAuthSubscription = user.subscribe(async (auth) => {
@@ -169,7 +169,7 @@
 
         <Route path="treatments" component={Treatments} />
         <!-- Groups -->
-        <Route path="update-group/:groupId" component={UpdateGroups} />
+        <Route path="update-group/:groupId" component={UpdateGroup} />
 
         <Route path="create-group" component={CreateGroup} />
 

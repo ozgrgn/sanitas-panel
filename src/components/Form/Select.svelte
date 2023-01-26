@@ -47,7 +47,7 @@
   {disabled}
   on:change={change(value)}
 >
-  <option disabled={!all} value={null}>{title}</option>
+  <option  value={null}>{title}</option>
   {#each values as _value}
     <option value={_value[valuesKey]}>
       {#if valuesTitleKeySub}

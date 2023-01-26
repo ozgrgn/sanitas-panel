@@ -170,7 +170,7 @@ const deleteAbout = (aboutId) => {
 };
 
 // Treatments
-const getTreatments = (limit, skip, lang, isActive, hp) => {
+const getTreatments = (limit, skip, lang, isActive, hp,group) => {
   let data = {};
   if (limit) {
     data.limit = limit;
@@ -186,6 +186,9 @@ const getTreatments = (limit, skip, lang, isActive, hp) => {
   }
   if (hp) {
     data.hp = hp;
+  }
+  if (group) {
+    data.group = group;
   }
   return Http.get(`${ENV.API_URL}/treatment`, { ...data });
 };

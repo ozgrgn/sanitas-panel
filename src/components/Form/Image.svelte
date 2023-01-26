@@ -3,6 +3,7 @@
   import Loading from "../Loading.svelte";
   export let value;
   export let isValid;
+  export let customClass
   let loading;
 
   let fileinput;
@@ -26,7 +27,7 @@
   };
 </script>
 
-<div class="flex w-full justify-around items-center gap-4">
+<div class="flex w-full justify-around items-center h-40 gap-4">
   <img
     class="h-10 object-cover"
     src="/assets/img/625182-200.png"
@@ -37,7 +38,7 @@
   />
 
   {#if value && !loading}
-    <img class="h-40  rounded border object-fit" src={value} alt="" />
+    <img class="{customClass?customClass:"h-40"} rounded border object-fit" src={value} alt="" />
   {/if}
 
   {#if loading}

@@ -178,14 +178,14 @@ let groups;
                 class="block  text-blueGray-600 text-xs font-bold mb-2"
                 for="grid-name"
               >
-                İsim
+                Tedavi Grubu
               </label>
               {#if groups}
                 <Select
                   bind:value={treatment.group.value}
                   bind:isValid={treatment.group.isValid}
                   values={groups}
-                  title={"Departman Seçin"}
+                  title={"Grup Seçin"}
                   valuesKey={"_id"}
                   valuesTitleKey={"title"}
                   customClass={"w-full"}
@@ -321,6 +321,8 @@ let groups;
               <TextEditor
                 placeholder={"Text 1"}
                 bind:value={treatment.text.value}
+                bind:incomingValue={treatment.text.value}
+
               />
             </div>
           </div>

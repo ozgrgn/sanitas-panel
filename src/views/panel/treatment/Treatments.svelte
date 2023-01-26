@@ -25,6 +25,8 @@
   let treatments;
   let langs;
   let lang;
+  let groups;
+  let selectedGroup;
   let limit = 10;
   let skip = 0;
   let totalDataCount = 0;
@@ -34,13 +36,26 @@
   };
   getLang();
   const getTreatments = async () => {
-    let response = await RestService.getTreatments(limit, skip, lang);
+    let response = await RestService.getTreatments(
+      limit,
+      skip,
+      lang,
+      undefined,
+      undefined,
+      selectedGroup
+    );
     treatments = response["treatments"];
     console.log(treatments, "treatments");
     totalDataCount = response["count"];
   };
   getTreatments();
-
+  const getGroups = async () => {
+    let response = await RestService.getGroups(limit, skip, lang);
+    groups = response["groups"];
+    console.log(groups, "groups");
+    totalDataCount = response["count"];
+  };
+  getGroups();
   const deleteTreatment = async (treatmentId) => {
     let response = await RestService.deleteTreatment(treatmentId);
     if (response["status"]) {
@@ -115,21 +130,40 @@
                   {/if}
                 </th>
                 <th
-                class="px-6 align-middle border border-solid py-3 text-xs border-l-0 border-r-0 whitespace-nowrap font-semibold  {color ===
-                'light'
-                  ? 'bg-blueGray-50 text-blueGray-500 border-blueGray-100'
-                  : 'bg-red-700 text-red-200 border-red-600'}"
-              >
-                Başlık
-              </th>
-              <th
-              class="px-6 align-middle border border-solid py-3 text-xs border-l-0 border-r-0 whitespace-nowrap font-semibold  {color ===
-              'light'
-                ? 'bg-blueGray-50 text-blueGray-500 border-blueGray-100'
-                : 'bg-red-700 text-red-200 border-red-600'}"
-            >
-              Perma
-            </th>
+                  class="px-6 align-middle border border-solid py-3 text-xs border-l-0 border-r-0 whitespace-nowrap font-semibold  {color ===
+                  'light'
+                    ? 'bg-blueGray-50 text-blueGray-500 border-blueGray-100'
+                    : 'bg-red-700 text-red-200 border-red-600'}"
+                >
+                  {#if groups}
+                    <Select
+                      bind:value={selectedGroup}
+                      change={() => getTreatments()}
+                      values={groups}
+                      title={"Grup seç"}
+                      valuesKey={"_id"}
+                      valuesTitleKey={"title"}
+                      customClass={"w-full border-0 max-w-xs"}
+                    />
+                  {/if}
+                </th>
+                <th
+                  class="px-6 align-middle border border-solid py-3 text-xs border-l-0 border-r-0 whitespace-nowrap font-semibold  {color ===
+                  'light'
+                    ? 'bg-blueGray-50 text-blueGray-500 border-blueGray-100'
+                    : 'bg-red-700 text-red-200 border-red-600'}"
+                >
+                  Başlık
+                </th>
+                <th
+                  class="px-6 align-middle border border-solid py-3 text-xs border-l-0 border-r-0 whitespace-nowrap font-semibold  {color ===
+                  'light'
+                    ? 'bg-blueGray-50 text-blueGray-500 border-blueGray-100'
+                    : 'bg-red-700 text-red-200 border-red-600'}"
+                >
+                  Perma
+                </th>
+
                 <th
                   class="px-6 align-middle border border-solid py-3 text-xs  border-l-0 border-r-0 whitespace-nowrap font-semibold  {color ===
                   'light'
@@ -147,15 +181,15 @@
                     {treatment.lang}
                   </td>
                   <td
-                  class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center"
-                >
-                  {treatment.title}
-                </td>
-                <td
-                class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center"
-              >
-                {treatment.perma}
-              </td>
+                    class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center"
+                  >
+                    {treatment.title}
+                  </td>
+                  <td
+                    class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center"
+                  >
+                    {treatment.perma}
+                  </td>
                   <td
                     class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center"
                   >

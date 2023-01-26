@@ -181,7 +181,7 @@
               >
                 Genel Bilgiler
               </a>
-              <a
+              <!-- <a
                 class="text-white font-semibold text-sm {$location.pathname.indexOf(
                   'translate'
                 ) !== -1
@@ -192,7 +192,7 @@
                 on:click={() => (navbarOpen = false)}
               >
                 Çeviriler
-              </a>
+              </a> -->
               <a
                 class="text-white font-semibold text-sm {$location.pathname.indexOf(
                   'admin'

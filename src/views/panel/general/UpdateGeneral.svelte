@@ -141,7 +141,7 @@
       <div class="rounded-t mb-0 px-4 py-3 border-0">
         <div class="text-center flex justify-between">
           <h3 class="font-semibold text-lg text-blueGray-700">
-            Genel Bilgiler güncelle
+            Genel Bilgiler Güncelle
           </h3>
         </div>
       </div>
@@ -173,13 +173,13 @@
                 class="block  text-blueGray-600 text-xs font-bold mb-2"
                 for="grid-name"
               >
-                Klinik İsmi
+                Şirket İsmi
               </label>
 
               <Input
                 bind:value={general.brand.value}
                 bind:isValid={general.brand.isValid}
-                placeholder={"Klinik İsmi"}
+                placeholder={"Şirket İsmi"}
                 required={true}
               />
             </div>
@@ -353,36 +353,19 @@
               />
             </div>
           </div>
-          <div class="w-full lg:w-3/12 px-4">
+          <div class="w-full lg:w-6/12 px-4">
             <div class="relative w-full mb-3">
               <label
                 class="block  text-blueGray-600 text-xs font-bold mb-2"
                 for="grid-name"
               >
-                Hafta İçi Saat
+                Kısa Açıklama
               </label>
 
-              <Input
-                bind:value={general.weekday.value}
-                bind:isValid={general.weekday.isValid}
-                placeholder={" Hafta İçi Saat"}
-                required={true}
-              />
-            </div>
-          </div>
-          <div class="w-full lg:w-3/12 px-4">
-            <div class="relative w-full mb-3">
-              <label
-                class="block  text-blueGray-600 text-xs font-bold mb-2"
-                for="grid-name"
-              >
-                Hafta Sonu Saat
-              </label>
-
-              <Input
-                bind:value={general.weekend.value}
-                bind:isValid={general.weekend.isValid}
-                placeholder={"Hafta Sonu Saat"}
+              <Textarea
+                bind:value={general.shortDesc.value}
+                bind:isValid={general.shortDesc.isValid}
+                placeholder={"Kısa Açıklama (Footer vb)"}
                 required={true}
               />
             </div>
@@ -404,23 +387,7 @@
               />
             </div>
           </div>
-          <div class="w-full lg:w-12/12 px-4">
-            <div class="relative w-full mb-3">
-              <label
-                class="block  text-blueGray-600 text-xs font-bold mb-2"
-                for="grid-name"
-              >
-                Kısa Açıklama
-              </label>
-
-              <Input
-                bind:value={general.shortDesc.value}
-                bind:isValid={general.shortDesc.isValid}
-                placeholder={"Kısa Açıklama (Footer vb)"}
-                required={true}
-              />
-            </div>
-          </div>
+      
      
           <div class="w-full lg:w-6/12 px-4">
             <div class="border relative w-full h-40 mb-3">
@@ -434,6 +401,8 @@
                 <Image
                   bind:value={general.logo1.value}
                   bind:isValid={general.logo1.isValid}
+                  customClass="h-20"
+
                 />
               </div>
             </div>
@@ -450,6 +419,8 @@
                 <Image
                   bind:value={general.logo2.value}
                   bind:isValid={general.logo2.isValid}
+                  customClass="h-20"
+
                 />
               </div>
             </div>
@@ -464,6 +435,7 @@
               </label>
               <div class="flex h-full flex-col justify-center my-2">
                 <Image
+                customClass="h-20"
                   bind:value={general.map1.value}
                   bind:isValid={general.map1.isValid}
                 />
@@ -480,6 +452,7 @@
               </label>
               <div class="flex h-full flex-col justify-center my-2">
                 <Image
+                customClass="h-20"
                   bind:value={general.map2.value}
                   bind:isValid={general.map2.isValid}
                 />

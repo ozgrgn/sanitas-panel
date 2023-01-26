@@ -25,7 +25,6 @@
 
   let group = {};
 
-
   values.map((v) => {
     if (v.defaultValue) {
       group[v.key] = { value: v.defaultValue };
@@ -76,7 +75,9 @@
     >
       <div class="rounded-t mb-0 px-4 py-3 border-0">
         <div class="text-center flex justify-between">
-          <h3 class="font-semibold text-lg text-blueGray-700">Tedavi Grubu ekle</h3>
+          <h3 class="font-semibold text-lg text-blueGray-700">
+            Tedavi Grubu ekle
+          </h3>
         </div>
       </div>
       <div class="flex-auto px-4 lg:px-10 py-10 pt-0">
@@ -90,15 +91,15 @@
                 Dil
               </label>
               {#if langs}
-              <Select
-                bind:value={group.lang.value}
-                bind:isValid={group.lang.isValid}
-                values={langs}
-                title={"Dil Seçin"}
-                valuesKey={"lang"}
-                valuesTitleKey={"title"}
-                customClass={"w-full"}
-              />
+                <Select
+                  bind:value={group.lang.value}
+                  bind:isValid={group.lang.isValid}
+                  values={langs}
+                  title={"Dil Seçin"}
+                  valuesKey={"lang"}
+                  valuesTitleKey={"title"}
+                  customClass={"w-full"}
+                />
               {/if}
             </div>
           </div>
@@ -115,6 +116,7 @@
             </div>
           </div>
         </div>
+
         <div class="flex flex-wrap my-4">
           <div class="w-full lg:w-3/12 px-4">
             <div class="relative w-full mb-3">
@@ -132,6 +134,7 @@
               />
             </div>
           </div>
+
           <div class="w-full lg:w-7/12 px-4">
             <div class="relative w-full mb-3">
               <label
@@ -165,76 +168,77 @@
             </div>
           </div>
         </div>
-        <div class="flex flex-wrap my-4">
-        <div class="w-full  px-4">
-          <div class="relative w-full mb-3">
-            <label
-              class="block  text-blueGray-600 text-xs font-bold mb-2"
-              for="grid-name"
-            >
-              Biraz Uzun Açıklama
-            </label>
-            <Input
-              bind:value={group.description2.value}
-              bind:isValid={group.description2.isValid}
-              placeholder={"Biraz Uzun Açıklama"}
-              required={true}
-            />
-          </div>
-        </div>
-      </div>
-        <div class="flex flex-wrap my-4">
-          <div class="w-full lg:w-6/12 px-4">
-            <div class="relative w-full mb-3">
-              <label
-                class="block  text-blueGray-600 text-xs font-bold mb-2"
-                for="grid-name"
-              >
-                SVG Kodu
-              </label>
-              <Textarea
-                bind:value={group.svg.value}
-                bind:isValid={group.svg.isValid}
-                placeholder={"SVG Kodu"}
-                required={true}
-              />
-            </div>
-          </div>
-          <div class="w-full lg:w-6/12 px-4">
-            <div class=" relative w-full h-40 mb-3">
-              <label
-                class="block text-blueGray-600 text-xs font-bold mb-2"
-                for="backgroundBanner"
-              >
-              Resim (405 × 225 px)
-              </label>
-              <div class="flex h-full border flex-col justify-center my-2">
-                <Image
-                  bind:value={group.image.value}
-                  bind:isValid={group.image.isValid}
+        {#if group.department.value}
+          <div class="flex flex-wrap my-4">
+            <div class="w-full  px-4">
+              <div class="relative w-full mb-3">
+                <label
+                  class="block  text-blueGray-600 text-xs font-bold mb-2"
+                  for="grid-name"
+                >
+                  Biraz Uzun Açıklama
+                </label>
+                <Input
+                  bind:value={group.description2.value}
+                  bind:isValid={group.description2.isValid}
+                  placeholder={"Biraz Uzun Açıklama"}
+                  required={true}
                 />
               </div>
             </div>
           </div>
-        </div>
-        <div class="flex flex-wrap">
-          <div class="w-full lg:w-12/12 px-4">
-            <div class="relative w-full mb-3">
-              <label
-                class="block  text-blueGray-600 text-xs font-bold mb-2"
-                for="grid-name"
-              >
-                Text
-              </label>
-
-              <TextEditor
-                placeholder={"Text"}
-                bind:value={group.text.value}
-
-              />
+          <div class="flex flex-wrap my-4">
+            <div class="w-full lg:w-6/12 px-4">
+              <div class="relative w-full mb-3">
+                <label
+                  class="block  text-blueGray-600 text-xs font-bold mb-2"
+                  for="grid-name"
+                >
+                  SVG Kodu
+                </label>
+                <Textarea
+                  bind:value={group.svg.value}
+                  bind:isValid={group.svg.isValid}
+                  placeholder={"SVG Kodu"}
+                  required={true}
+                />
+              </div>
+            </div>
+            <div class="w-full lg:w-6/12 px-4">
+              <div class=" relative w-full h-40 mb-3">
+                <label
+                  class="block text-blueGray-600 text-xs font-bold mb-2"
+                  for="backgroundBanner"
+                >
+                  Resim (405 × 225 px)
+                </label>
+                <div class="flex h-full border flex-col justify-center my-2">
+                  <Image
+                    bind:value={group.image.value}
+                    bind:isValid={group.image.isValid}
+                  />
+                </div>
+              </div>
             </div>
           </div>
-        </div>
+          <div class="flex flex-wrap">
+            <div class="w-full lg:w-12/12 px-4">
+              <div class="relative w-full mb-3">
+                <label
+                  class="block  text-blueGray-600 text-xs font-bold mb-2"
+                  for="grid-name"
+                >
+                  Text
+                </label>
+
+                <TextEditor
+                  placeholder={"Text"}
+                  bind:value={group.text.value}
+                />
+              </div>
+            </div>
+          </div>
+        {/if}
         <div class="flex flex-wrap">
           <div class="w-full lg:w-12/12 px-4 text-right mt-2">
             <button
