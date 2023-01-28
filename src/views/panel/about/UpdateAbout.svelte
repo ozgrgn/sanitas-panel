@@ -36,13 +36,14 @@
   };
   let about;
   let langs = [];
+  let images = [];
 
   let values = [
     { key: "lang", customValue: null },
-    { key: "about_spot", customValue: null },
     { key: "about_title", customValue: null },
     { key: "about_left", customValue: null },
     { key: "about_right", customValue: null },
+    { key: "images", customValue: null },
   ];
   const getLang = async () => {
     let response = await RestService.getLangs(undefined, undefined);
@@ -137,7 +138,7 @@
       </div>
       <div class="flex-auto px-4 lg:px-10 py-10 pt-0">
         {#if about}
-        <div class="flex flex-wrap my-4">
+         <div class="flex flex-wrap my-4">
           <div class="w-full lg:w-3/12 px-4">
             <div class="relative w-full mb-3">
               <label
@@ -158,146 +159,54 @@
             </div>
           </div>
         </div>
-          <div class="flex flex-wrap my-4">
-            <div class="w-full lg:w-3/12 px-4">
-              <div class="relative w-full mb-3">
-                <label
-                  class="block  text-blueGray-600 text-xs font-bold mb-2"
-                  for="grid-name"
-                >
-                  Spot
-                </label>
-                <Input
-                  bind:value={about.about_spot.value}
-                  bind:isValid={about.about_spot.isValid}
-                  placeholder={"Hakkımızda Spot"}
-                  required={true}
-                />
-              </div>
-            </div>
-            <div class="w-full lg:w-9/12 px-4">
-              <div class="relative w-full mb-3">
-                <label
-                  class="block  text-blueGray-600 text-xs font-bold mb-2"
-                  for="grid-name"
-                >
-                  Başlık
-                </label>
-                <Input
-                  bind:value={about.about_title.value}
-                  bind:isValid={about.about_title.isValid}
-                  placeholder={"Hakkımızda Başlık"}
-                  required={true}
-                />
-              </div>
+        <div class="flex flex-wrap my-4">
+          <div class="w-full lg:w-6/12 px-4">
+            <div class="relative w-full mb-3">
+              <label
+                class="block  text-blueGray-600 text-xs font-bold mb-2"
+                for="grid-name"
+              >
+                Başlık
+              </label>
+              <Input
+                bind:value={about.about_title.value}
+                bind:isValid={about.about_title.isValid}
+                placeholder={"Hakkımızda Başlık"}
+                required={true}
+              />
             </div>
           </div>
-          <div class="flex flex-wrap my-4">
-            <div class="w-full lg:w-6/12 px-4">
-              <div class="relative w-full mb-3">
-                <label
-                  class="block  text-blueGray-600 text-xs font-bold mb-2"
-                  for="grid-name"
-                >
-                  Text Sol
-                </label>
+          <div class="w-full lg:w-6/12 px-4">
+            <div class="relative w-full mb-3">
+              <label
+                class="block  text-blueGray-600 text-xs font-bold mb-2"
+                for="grid-name"
+              >
+                Kısa Açıklama
+              </label>
 
-                <Textarea
-                  placeholder={"Text 1"}
-                  bind:value={about.about_left.value}
-                  bind:incomingValue={about.about_left.value}
-                />
-              </div>
-            </div>
-            <div class="w-full lg:w-6/12 px-4">
-              <div class="relative w-full mb-3">
-                <label
-                  class="block  text-blueGray-600 text-xs font-bold mb-2"
-                  for="grid-name"
-                >
-                  Text Sağ
-                </label>
-                <Textarea
-                  bind:value={about.about_right.value}
-                  bind:incomingValue={about.about_right.value}
-                  placeholder={"Text 2"}
-                />
-              </div>
+              <Textarea
+                placeholder={"Kısa Açıklama Yukarısı İçin"}
+                bind:value={about.about_left.value}
+              />
             </div>
           </div>
-          <div class="flex flex-wrap my-4">
-            <div class="lg:w-6/12 px-4">
-              <div class="">
-                <div class=" ">
-                  {#each about.images as aboutImage, index}
-                    <div class="border mt-2 p-1 grid grid-flow-col">
-                      <span
-                        class="px-2 flex flex-col justify-center text-blueGray-600 text-xs font-bold"
-                        >{index + 1}.{"Resim"}</span
-                      >
-                      <div class="col-span-2">
-                        <ImageArray bind:value={about.images[index].image} />
-                      </div>
-                      <div class="flex flex-col justify-center items-end">
-                        <button
-                          on:click={() => deleteImage(index)}
-                          class="w-14 bg-red-500 hover:bg-red-600 text-white font-bold text-xs m-2 px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none"
-                          type="button"
-                        >
-                          SİL
-                        </button>
-                      </div>
-                    </div>
-                  {/each}
-                </div>
-              </div>
-              <button
-                on:click={() =>
-                  (about.images = [...about.images, { image: null }])}
-                class=" mt-2 bg-red-400 disabled:bg-red-300 text-white active:bg-blue-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none ease-linear transition-all duration-150"
-                type="button"
+          <div class="w-full lg:w-12/12 px-4">
+            <div class="relative w-full mb-3">
+              <label
+                class="block  text-blueGray-600 text-xs font-bold mb-2"
+                for="grid-name"
               >
-                Hakkımızda Resmi Ekle
-              </button>
-            </div>
-            <div class="lg:w-6/12 px-4">
-              <div class="">
-                <div class=" ">
-                  {#each about.logos as aboutLogo, index}
-                    <div class="border mt-2 p-1 grid grid-flow-col">
-                      <span
-                        class="px-2 flex flex-col justify-center text-blueGray-600 text-xs font-bold"
-                        >{index + 1}.{"Resim"}</span
-                      >
-                      <div class="col-span-2">
-                        <ImageArray
-                          bind:value={about.logos[index].image}
-                          {index}
-                        />
-                      </div>
-                      <div class="flex flex-col justify-center items-end">
-                        <button
-                          on:click={() => deleteLogo(index)}
-                          class="w-14 bg-red-500 hover:bg-red-600 text-white font-bold text-xs m-2 px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none"
-                          type="button"
-                        >
-                          SİL
-                        </button>
-                      </div>
-                    </div>
-                  {/each}
-                </div>
-              </div>
-              <button
-                on:click={() =>
-                  (about.logos = [...about.logos, { image: null }])}
-                class=" mt-2 bg-red-400 disabled:bg-red-300 text-white active:bg-blue-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none ease-linear transition-all duration-150"
-                type="button"
-              >
-                Logo Ekle
-              </button>
+                Uzun Açıklama
+              </label>
+              <TextEditor
+                placeholder={"Uzun Açıklama Sayfanın Altı İçin"}
+                bind:value={about.about_right.value}
+              />
             </div>
           </div>
+        </div>
+      
           <div class="flex flex-wrap">
             <div class="w-full lg:w-12/12 px-4 text-right mt-5">
               <button

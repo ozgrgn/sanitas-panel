@@ -13,34 +13,34 @@
     { key: "treatments", customValue: null },
     { key: "contact", customValue: null },
     { key: "language", customValue: null },
-    { key: "emergency_line", customValue: null },
-    { key: "weekdays", customValue: null },
-    { key: "weekendWorkDays", customValue: null },
-    { key: "monday", customValue: null },
-    { key: "tuesday", customValue: null },
-    { key: "wednesday", customValue: null },
-    { key: "thursday", customValue: null },
-    { key: "friday", customValue: null },
-    { key: "saturday", customValue: null },
-    { key: "sunday", customValue: null },
     { key: "allTreatments", customValue: null },
-    { key: "get_in_touch_with_us", customValue: null },
-    { key: "call_us_anytime", customValue: null },
-    { key: "mail_us", customValue: null },
     { key: "book_an_appointment", customValue: null },
-    { key: "write_us", customValue: null },
     { key: "name", customValue: null },
     { key: "phone", customValue: null },
     { key: "mail", customValue: null },
     { key: "send", customValue: null },
-    { key: "sent", customValue: null },
     { key: "phone_required", customValue: null },
     { key: "name_required", customValue: null },
     { key: "email_required", customValue: null },
-    { key: "book", customValue: null },
     { key: "address", customValue: null },
-    { key: "book_by_phone", customValue: null },
     { key: "note", customValue: null },
+    { key: "subject", customValue: null },
+    { key: "faq", customValue: null },
+    { key: "faq1", customValue: null },
+    { key: "faq2", customValue: null },
+    { key: "review1", customValue: null },
+    { key: "review2", customValue: null },
+    { key: "group1", customValue: null },
+    { key: "group2", customValue: null },
+    { key: "about1", customValue: null },
+    { key: "about2", customValue: null },
+    { key: "form_header1", customValue: null },
+    { key: "form_header2", customValue: null },
+    { key: "form_button", customValue: null },
+    { key: "form_sent", customValue: null },
+
+
+
   ];
 
   let translate = {};
@@ -184,7 +184,151 @@
               />
             </div>
           </div>
-
+          <div class="w-full lg:w-3/12 px-4">
+            <div class="relative w-full mb-3">
+              <label
+                class="block  text-blueGray-600 text-xs font-bold mb-2"
+                for="grid-name"
+              >
+                SSS
+              </label>
+              <Input
+                bind:value={translate.faq.value}
+                bind:isValid={translate.faq.isValid}
+                placeholder={"SSS"}
+                required={true}
+              />
+            </div>
+          </div>
+          <div class="w-full lg:w-3/12 px-4">
+            <div class="relative w-full mb-3">
+              <label
+                class="block  text-blueGray-600 text-xs font-bold mb-2"
+                for="grid-name"
+              >
+                SSS Başlık 1
+              </label>
+              <Input
+                bind:value={translate.faq1.value}
+                bind:isValid={translate.faq1.isValid}
+                placeholder={"SSS Başlık 1"}
+                required={true}
+              />
+            </div>
+          </div>
+          <div class="w-full lg:w-3/12 px-4">
+            <div class="relative w-full mb-3">
+              <label
+                class="block  text-blueGray-600 text-xs font-bold mb-2"
+                for="grid-name"
+              >
+                SSS Başlık 2
+              </label>
+              <Input
+                bind:value={translate.faq2.value}
+                bind:isValid={translate.faq2.isValid}
+                placeholder={"SSS Başlık 2"}
+                required={true}
+              />
+            </div>
+          </div>
+          <div class="w-full lg:w-3/12 px-4">
+            <div class="relative w-full mb-3">
+              <label
+                class="block  text-blueGray-600 text-xs font-bold mb-2"
+                for="grid-name"
+              >
+                Yorumlar Başlık 1
+              </label>
+              <Input
+                bind:value={translate.review1.value}
+                bind:isValid={translate.review1.isValid}
+                placeholder={"Yorumlar Başlık 1"}
+                required={true}
+              />
+            </div>
+          </div>
+          <div class="w-full lg:w-3/12 px-4">
+            <div class="relative w-full mb-3">
+              <label
+                class="block  text-blueGray-600 text-xs font-bold mb-2"
+                for="grid-name"
+              >
+              Yorumlar Başlık 2
+              </label>
+              <Input
+                bind:value={translate.review2.value}
+                bind:isValid={translate.review2.isValid}
+                placeholder={"Yorumlar Başlık 2"}
+                required={true}
+              />
+            </div>
+          </div>
+          <div class="w-full lg:w-3/12 px-4">
+            <div class="relative w-full mb-3">
+              <label
+                class="block  text-blueGray-600 text-xs font-bold mb-2"
+                for="grid-name"
+              >
+                Tedavi Grupları Başlık 1
+              </label>
+              <Input
+                bind:value={translate.group1.value}
+                bind:isValid={translate.group1.isValid}
+                placeholder={"Tedavi Grupları Başlık 1"}
+                required={true}
+              />
+            </div>
+          </div>
+          <div class="w-full lg:w-3/12 px-4">
+            <div class="relative w-full mb-3">
+              <label
+                class="block  text-blueGray-600 text-xs font-bold mb-2"
+                for="grid-name"
+              >
+                Tedavi Grupları Başlık 2
+              </label>
+              <Input
+                bind:value={translate.group2.value}
+                bind:isValid={translate.group2.isValid}
+                placeholder={"Tedavi Grupları Başlık 2"}
+                required={true}
+              />
+            </div>
+          </div>
+          <div class="w-full lg:w-3/12 px-4">
+            <div class="relative w-full mb-3">
+              <label
+                class="block  text-blueGray-600 text-xs font-bold mb-2"
+                for="grid-name"
+              >
+                Hakkımızda Başlık 1
+              </label>
+              <Input
+                bind:value={translate.about1.value}
+                bind:isValid={translate.about2.isValid}
+                placeholder={"Hakkımızda Başlık 1"}
+                required={true}
+              />
+            </div>
+          </div>
+          <div class="w-full lg:w-3/12 px-4">
+            <div class="relative w-full mb-3">
+              <label
+                class="block  text-blueGray-600 text-xs font-bold mb-2"
+                for="grid-name"
+              >
+              Hakkımızda Başlık 2
+              </label>
+              <Input
+                bind:value={translate.about2.value}
+                bind:isValid={translate.about2.isValid}
+                placeholder={"Hakkımızda Başlık 2"}
+                required={true}
+              />
+            </div>
+          </div>
+          
           <div class="w-full lg:w-3/12 px-4">
             <div class="relative w-full mb-3">
               <label
@@ -201,168 +345,7 @@
               />
             </div>
           </div>
-          <div class="w-full lg:w-3/12 px-4">
-            <div class="relative w-full mb-3">
-              <label
-                class="block  text-blueGray-600 text-xs font-bold mb-2"
-                for="grid-name"
-              >
-                7/24 Acil Hat
-              </label>
-              <Input
-                bind:value={translate.emergency_line.value}
-                bind:isValid={translate.emergency_line.isValid}
-                placeholder={"24/7 Emergency Phone"}
-                required={true}
-              />
-            </div>
-          </div>
 
-          <div class="w-full lg:w-3/12 px-4">
-            <div class="relative w-full mb-3">
-              <label
-                class="block  text-blueGray-600 text-xs font-bold mb-2"
-                for="grid-name"
-              >
-                H.içi Günler
-              </label>
-              <Input
-                bind:value={translate.weekdays.value}
-                bind:isValid={translate.weekdays.isValid}
-                placeholder={"Monday - Friday"}
-                required={true}
-              />
-            </div>
-          </div>
-          <div class="w-full lg:w-3/12 px-4">
-            <div class="relative w-full mb-3">
-              <label
-                class="block  text-blueGray-600 text-xs font-bold mb-2"
-                for="grid-name"
-              >
-              H.sonu Günler
-              </label>
-              <Input
-                bind:value={translate.weekendWorkDays.value}
-                bind:isValid={translate.weekendWorkDays.isValid}
-                placeholder={"Saturday"}
-                required={true}
-              />
-            </div>
-          </div>
-          <div class="w-full lg:w-3/12 px-4">
-            <div class="relative w-full mb-3">
-              <label
-                class="block  text-blueGray-600 text-xs font-bold mb-2"
-                for="grid-name"
-              >
-                Pazartesi
-              </label>
-              <Input
-                bind:value={translate.monday.value}
-                bind:isValid={translate.monday.isValid}
-                placeholder={"Monday "}
-                required={true}
-              />
-            </div>
-          </div>
-
-          <div class="w-full lg:w-3/12 px-4">
-            <div class="relative w-full mb-3">
-              <label
-                class="block  text-blueGray-600 text-xs font-bold mb-2"
-                for="grid-name"
-              >
-                Salı
-              </label>
-              <Input
-                bind:value={translate.tuesday.value}
-                bind:isValid={translate.tuesday.isValid}
-                placeholder={"Tuesday"}
-                required={true}
-              />
-            </div>
-          </div>
-          <div class="w-full lg:w-3/12 px-4">
-            <div class="relative w-full mb-3">
-              <label
-                class="block  text-blueGray-600 text-xs font-bold mb-2"
-                for="grid-name"
-              >
-                Çarşamba
-              </label>
-              <Input
-                bind:value={translate.wednesday.value}
-                bind:isValid={translate.wednesday.isValid}
-                placeholder={"Wednesday"}
-                required={true}
-              />
-            </div>
-          </div>
-          <div class="w-full lg:w-3/12 px-4">
-            <div class="relative w-full mb-3">
-              <label
-                class="block  text-blueGray-600 text-xs font-bold mb-2"
-                for="grid-name"
-              >
-                Perşembe
-              </label>
-              <Input
-                bind:value={translate.thursday.value}
-                bind:isValid={translate.thursday.isValid}
-                placeholder={"Thursday"}
-                required={true}
-              />
-            </div>
-          </div>
-          <div class="w-full lg:w-3/12 px-4">
-            <div class="relative w-full mb-3">
-              <label
-                class="block  text-blueGray-600 text-xs font-bold mb-2"
-                for="grid-name"
-              >
-                Cuma
-              </label>
-              <Input
-                bind:value={translate.friday.value}
-                bind:isValid={translate.friday.isValid}
-                placeholder={"Friday"}
-                required={true}
-              />
-            </div>
-          </div>
-          <div class="w-full lg:w-3/12 px-4">
-            <div class="relative w-full mb-3">
-              <label
-                class="block  text-blueGray-600 text-xs font-bold mb-2"
-                for="grid-name"
-              >
-                Cumartesi
-              </label>
-              <Input
-                bind:value={translate.saturday.value}
-                bind:isValid={translate.saturday.isValid}
-                placeholder={"Saturday"}
-                required={true}
-              />
-            </div>
-          </div>
-          <div class="w-full lg:w-3/12 px-4">
-            <div class="relative w-full mb-3">
-              <label
-                class="block  text-blueGray-600 text-xs font-bold mb-2"
-                for="grid-name"
-              >
-                Pazar
-              </label>
-              <Input
-                bind:value={translate.sunday.value}
-                bind:isValid={translate.sunday.isValid}
-                placeholder={"Sunday"}
-                required={true}
-              />
-            </div>
-          </div>
           <div class="w-full lg:w-3/12 px-4">
             <div class="relative w-full mb-3">
               <label
@@ -379,18 +362,19 @@
               />
             </div>
           </div>
+
           <div class="w-full lg:w-3/12 px-4">
             <div class="relative w-full mb-3">
               <label
                 class="block  text-blueGray-600 text-xs font-bold mb-2"
                 for="grid-name"
               >
-                Bizimle İletişime Geçin
+                From Başlık 1
               </label>
               <Input
-                bind:value={translate.get_in_touch_with_us.value}
-                bind:isValid={translate.get_in_touch_with_us.isValid}
-                placeholder={"Get in touch with us"}
+                bind:value={translate.form_header1.value}
+                bind:isValid={translate.form_header1.isValid}
+                placeholder={"From Başlık 1"}
                 required={true}
               />
             </div>
@@ -401,12 +385,12 @@
                 class="block  text-blueGray-600 text-xs font-bold mb-2"
                 for="grid-name"
               >
-                Bizi Arayın
+                From Başlık 2
               </label>
               <Input
-                bind:value={translate.call_us_anytime.value}
-                bind:isValid={translate.call_us_anytime.isValid}
-                placeholder={"Call us anytime"}
+                bind:value={translate.form_header2.value}
+                bind:isValid={translate.form_header2.isValid}
+                placeholder={"From Başlık 2"}
                 required={true}
               />
             </div>
@@ -417,12 +401,12 @@
                 class="block  text-blueGray-600 text-xs font-bold mb-2"
                 for="grid-name"
               >
-                Mail ile ulaşın
+                From Button
               </label>
               <Input
-                bind:value={translate.mail_us.value}
-                bind:isValid={translate.mail_us.isValid}
-                placeholder={"Mail us"}
+                bind:value={translate.form_button.value}
+                bind:isValid={translate.form_button.isValid}
+                placeholder={"From Button"}
                 required={true}
               />
             </div>
@@ -433,28 +417,12 @@
                 class="block  text-blueGray-600 text-xs font-bold mb-2"
                 for="grid-name"
               >
-                Randevu Oluşturun
+                From Gönderildi Mesajı
               </label>
               <Input
-                bind:value={translate.book_an_appointment.value}
-                bind:isValid={translate.book_an_appointment.isValid}
-                placeholder={"Book an appointment"}
-                required={true}
-              />
-            </div>
-          </div>
-          <div class="w-full lg:w-3/12 px-4">
-            <div class="relative w-full mb-3">
-              <label
-                class="block  text-blueGray-600 text-xs font-bold mb-2"
-                for="grid-name"
-              >
-                Bize Yazın
-              </label>
-              <Input
-                bind:value={translate.write_us.value}
-                bind:isValid={translate.write_us.isValid}
-                placeholder={"Write us"}
+                bind:value={translate.form_sent.value}
+                bind:isValid={translate.form_sent.isValid}
+                placeholder={"From Button"}
                 required={true}
               />
             </div>
@@ -513,6 +481,22 @@
                 class="block  text-blueGray-600 text-xs font-bold mb-2"
                 for="grid-name"
               >
+                Konu
+              </label>
+              <Input
+                bind:value={translate.subject.value}
+                bind:isValid={translate.subject.isValid}
+                placeholder={"Konu"}
+                required={false}
+              />
+            </div>
+          </div>
+          <div class="w-full lg:w-3/12 px-4">
+            <div class="relative w-full mb-3">
+              <label
+                class="block  text-blueGray-600 text-xs font-bold mb-2"
+                for="grid-name"
+              >
                 Gönder
               </label>
               <Input
@@ -523,23 +507,23 @@
               />
             </div>
           </div>
-            <div class="w-full lg:w-3/12 px-4">
-              <div class="relative w-full mb-3">
-                <label
-                  class="block  text-blueGray-600 text-xs font-bold mb-2"
-                  for="grid-name"
-                >
-                  İsim Gerekli
-                </label>
-                <Input
-                  bind:value={translate.name_required.value}
-                  bind:isValid={translate.name_required.isValid}
-                  placeholder={"Name required"}
-                  required={true}
-                />
-              </div>
+          <div class="w-full lg:w-3/12 px-4">
+            <div class="relative w-full mb-3">
+              <label
+                class="block  text-blueGray-600 text-xs font-bold mb-2"
+                for="grid-name"
+              >
+                İsim Gerekli
+              </label>
+              <Input
+                bind:value={translate.name_required.value}
+                bind:isValid={translate.name_required.isValid}
+                placeholder={"Name required"}
+                required={true}
+              />
             </div>
-        
+          </div>
+
           <div class="w-full lg:w-3/12 px-4">
             <div class="relative w-full mb-3">
               <label
@@ -572,22 +556,7 @@
               />
             </div>
           </div>
-          <div class="w-full lg:w-3/12 px-4">
-            <div class="relative w-full mb-3">
-              <label
-                class="block  text-blueGray-600 text-xs font-bold mb-2"
-                for="grid-name"
-              >
-              Rez.
-              </label>
-              <Input
-                bind:value={translate.book.value}
-                bind:isValid={translate.book.isValid}
-                placeholder={"Book"}
-                required={true}
-              />
-            </div>
-          </div>
+
           <div class="w-full lg:w-3/12 px-4">
             <div class="relative w-full mb-3">
               <label
@@ -604,22 +573,7 @@
               />
             </div>
           </div>
-          <div class="w-full lg:w-3/12 px-4">
-            <div class="relative w-full mb-3">
-              <label
-                class="block  text-blueGray-600 text-xs font-bold mb-2"
-                for="grid-name"
-              >
-                Telefonla Rezervasyon
-              </label>
-              <Input
-                bind:value={translate.book_by_phone.value}
-                bind:isValid={translate.book_by_phone.isValid}
-                placeholder={"Book By Phone"}
-                required={true}
-              />
-            </div>
-          </div>
+
           <div class="w-full lg:w-3/12 px-4">
             <div class="relative w-full mb-3">
               <label
@@ -636,7 +590,22 @@
               />
             </div>
           </div>
-     
+          <div class="w-full lg:w-3/12 px-4">
+            <div class="relative w-full mb-3">
+              <label
+                class="block  text-blueGray-600 text-xs font-bold mb-2"
+                for="grid-name"
+              >
+                Randevu Butonu
+              </label>
+              <Input
+                bind:value={translate.book_an_appointment.value}
+                bind:isValid={translate.book_an_appointment.isValid}
+                placeholder={"Free Consultation"}
+                required={true}
+              />
+            </div>
+          </div>
         </div>
         <div class="flex flex-wrap">
           <div class="w-full lg:w-12/12 px-4 text-right mt-2">

@@ -44,6 +44,9 @@
   import UpdateGroup from "./group/UpdateGroup.svelte";
   import CreateGroup from "./group/CreateGroup.svelte";
   import Groups from "./group/Groups.svelte";
+  import UpdateFaq from "./faq/UpdateFaq.svelte";
+  import CreateFaq from "./faq/CreateFaq.svelte";
+  import Faqs from "./faq/Faqs.svelte";
   // let userAuthSubscription = user.subscribe(async (auth) => {
   //   if (!auth) {
   //     navigate("/auth/login");
@@ -174,6 +177,12 @@
         <Route path="create-group" component={CreateGroup} />
 
         <Route path="groups" component={Groups} />
+           <!-- Faqs -->
+           <Route path="update-faq/:faqId" component={UpdateFaq} />
+
+           <Route path="create-faq" component={CreateFaq} />
+   
+           <Route path="faqs" component={Faqs} />
       </Router>
 
       <FooterAdmin />

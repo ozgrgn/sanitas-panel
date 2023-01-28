@@ -154,41 +154,7 @@
             </div>
           </div>
         </div>
-        <div class="flex flex-wrap my-4">
-          <div class="lg:w-6/12 px-4">
-            <div class="">
-              <div class=" ">
-                {#each images as Image, index}
-                  <div class="border mt-2 p-1 grid grid-flow-col">
-                    <span
-                      class="px-2 flex flex-col justify-center text-blueGray-600 text-xs font-bold"
-                      >{index + 1}.{"Resim"}</span
-                    >
-                    <div class="col-span-2">
-                      <ImageArray bind:value={Image.image} />
-                    </div>
-                    <div class="flex flex-col justify-center items-end">
-                      <button
-                        on:click={() => deleteImage(index)}
-                        class="w-14 bg-red-500 hover:bg-red-600 text-white font-bold text-xs m-2 px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none"
-                        type="button"
-                      >
-                        SİL
-                      </button>
-                    </div>
-                  </div>
-                {/each}
-              </div>
-            </div>
-            <button
-              on:click={() => (images = [...images, { image: null }])}
-              class=" mt-2 bg-red-400 disabled:bg-red-300 text-white active:bg-blue-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none ease-linear transition-all duration-150"
-              type="button"
-            >
-              Hakkımızda Resmi Ekle
-            </button>
-          </div>
-        </div>
+   
         <div class="flex flex-wrap">
           <div class="w-full lg:w-12/12 px-4 text-right mt-2">
             <button

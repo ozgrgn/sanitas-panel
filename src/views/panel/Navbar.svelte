@@ -157,6 +157,18 @@
                 Tedaviler
               </a>
               <a
+              class="text-white font-semibold text-sm {$location.pathname.indexOf(
+                'faq'
+              ) !== -1
+                ? 'hover:text-white text-base'
+                : 'text-white/80 hover:text-white'}"
+              href="/panel/faqs"
+              use:link
+              on:click={() => (navbarOpen = false)}
+            >
+              SSS
+            </a>
+              <a
                 class="text-white font-semibold text-sm {$location.pathname.indexOf(
                   'contact'
                 ) !== -1
@@ -181,7 +193,7 @@
               >
                 Genel Bilgiler
               </a>
-              <!-- <a
+              <a
                 class="text-white font-semibold text-sm {$location.pathname.indexOf(
                   'translate'
                 ) !== -1
@@ -192,7 +204,7 @@
                 on:click={() => (navbarOpen = false)}
               >
                 Çeviriler
-              </a> -->
+              </a>
               <a
                 class="text-white font-semibold text-sm {$location.pathname.indexOf(
                   'admin'

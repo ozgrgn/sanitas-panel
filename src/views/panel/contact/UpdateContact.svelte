@@ -158,58 +158,7 @@
           </div>
         </div>
         <div class="flex flex-wrap my-4">
-          <div class="w-full lg:w-3/12 px-4">
-            <div class="relative w-full mb-3">
-              <label
-                class="block  text-blueGray-600 text-xs font-bold mb-2"
-                for="grid-name"
-              >
-                Ana Başlık
-              </label>
-              <Input
-                bind:value={contact.header.value}
-                bind:isValid={contact.header.isValid}
-                placeholder={"İletişim Ana Başlıka"}
-                required={true}
-              />
-            </div>
-          </div>
-          <div class="w-full lg:w-9/12 px-4">
-            <div class="relative w-full mb-3">
-              <label
-                class="block  text-blueGray-600 text-xs font-bold mb-2"
-                for="grid-name"
-              >
-                Ana Metin
-              </label>
-              <Input
-                bind:value={contact.text.value}
-                bind:isValid={contact.text.isValid}
-                placeholder={"İletişim Ana Metin"}
-                required={true}
-              />
-            </div>
-          </div>
-        </div>
-        <div class="flex flex-wrap my-4">
-          <div class="w-full lg:w-6/12 px-4">
-            <div class="relative w-full mb-3">
-              <label
-                class="block  text-blueGray-600 text-xs font-bold mb-2"
-                for="grid-name"
-              >
-                Spot
-              </label>
-
-              <Input
-                bind:value={contact.spot.value}
-                bind:isValid={contact.spot.isValid}
-                placeholder={"İletişim Spot"}
-                required={true}
-              />
-            </div>
-          </div>
-          <div class="w-full lg:w-6/12 px-4">
+          <div class="w-full lg:w-4/12 px-4">
             <div class="relative w-full mb-3">
               <label
                 class="block  text-blueGray-600 text-xs font-bold mb-2"
@@ -226,7 +175,7 @@
               />
             </div>
           </div>
-          <div class="w-full lg:w-12/12 px-4">
+          <div class="w-full lg:w-8/12 px-4">
             <div class="relative w-full mb-3">
               <label
                 class="block  text-blueGray-600 text-xs font-bold mb-2"
@@ -244,6 +193,41 @@
             </div>
           </div>
         </div>
+        <div class="flex flex-wrap my-4">
+          <div class="w-full lg:w-4/12 px-4">
+            <div class="relative w-full mb-3">
+              <label
+                class="block  text-blueGray-600 text-xs font-bold mb-2"
+                for="grid-name"
+              >
+                Yan Başlık
+              </label>
+              <Input
+                bind:value={contact.header.value}
+                bind:isValid={contact.header.isValid}
+                placeholder={"İletişim Ana Başlıka"}
+                required={true}
+              />
+            </div>
+          </div>
+          <div class="w-full lg:w-4/12 px-4">
+            <div class="relative w-full mb-3">
+              <label
+                class="block  text-blueGray-600 text-xs font-bold mb-2"
+                for="grid-name"
+              >
+                Yan Metin
+              </label>
+              <Input
+                bind:value={contact.text.value}
+                bind:isValid={contact.text.isValid}
+                placeholder={"İletişim Ana Metin"}
+                required={true}
+              />
+            </div>
+          </div>
+        </div>
+     
           <div class="flex flex-wrap">
             <div class="w-full lg:w-12/12 px-4 text-right mt-5">
               <button

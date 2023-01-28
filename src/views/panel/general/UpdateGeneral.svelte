@@ -342,7 +342,7 @@
                 class="block  text-blueGray-600 text-xs font-bold mb-2"
                 for="grid-name"
               >
-                Whatsapp
+                Whatsapp (90 555 55 55)
               </label>
 
               <Input
@@ -431,7 +431,7 @@
                 class="block text-blueGray-600 text-xs font-bold mb-2"
                 for="logo1"
               >
-                Map 1
+                Contact Resmi
               </label>
               <div class="flex h-full flex-col justify-center my-2">
                 <Image
@@ -448,7 +448,7 @@
                 class="block text-blueGray-600 text-xs font-bold mb-2"
                 for="logo2"
               >
-                Map 2
+                Map (Şimdilik Kullanılmıyor)
               </label>
               <div class="flex h-full flex-col justify-center my-2">
                 <Image

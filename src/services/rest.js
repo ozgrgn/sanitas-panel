@@ -275,7 +275,44 @@ const deleteGroup = (groupId) => {
   return Http.delete(`${ENV.API_URL}/group/${groupId}`);
 };
 
+// Faqs
+const getFaqs = (limit, skip, lang, isActive, treatment,general) => {
+  let data = {};
+  if (limit) {
+    data.limit = limit;
+  }
+  if (skip) {
+    data.skip = skip;
+  }
+  if (lang) {
+    data.lang = lang;
+  }
+  if (isActive) {
+    data.isActive = isActive;
+  }
+  if (treatment) {
+    data.treatment = treatment;
+  }
+  if (general) {
+    data.general = general;
+  }
+  return Http.get(`${ENV.API_URL}/faq`, { ...data });
+};
+const addFaq = (data) => {
+  return Http.post(`${ENV.API_URL}/faq`, data);
+};
 
+const updateFaq = (faqId, data) => {
+  return Http.put(`${ENV.API_URL}/faq/${faqId}`, {
+    faq: data,
+  });
+};
+const getFaq = (faqId) => {
+  return Http.get(`${ENV.API_URL}/faq/${faqId}`);
+};
+const deleteFaq = (faqId) => {
+  return Http.delete(`${ENV.API_URL}/faq/${faqId}`);
+};
 
 // Contacts
 const getContacts = (limit, skip, lang) => {
@@ -500,6 +537,12 @@ export default {
   addGroup,
   updateGroup,
   deleteGroup,
+    //faq
+    getFaqs,
+    getFaq,
+    addFaq,
+    updateFaq,
+    deleteFaq,
   //contact
   getContacts,
   getContact,

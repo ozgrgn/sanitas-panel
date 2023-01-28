@@ -1,9 +1,12 @@
 <script>
   export let value;
+  export let change = () => {};
+
 </script>
 
 <label class="switch">
-  <input type="checkbox" bind:checked={value} />
+  <input type="checkbox" bind:checked={value}   on:change={change(value)}
+  />
   <span class="slider" />
 </label>
 
