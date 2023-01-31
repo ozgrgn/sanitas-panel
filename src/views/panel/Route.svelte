@@ -47,6 +47,9 @@
   import UpdateFaq from "./faq/UpdateFaq.svelte";
   import CreateFaq from "./faq/CreateFaq.svelte";
   import Faqs from "./faq/Faqs.svelte";
+  import UpdateReview from "./reviews/UpdateReview.svelte";
+  import CreateReview from "./reviews/CreateReview.svelte";
+  import Reviews from "./reviews/Reviews.svelte";
   // let userAuthSubscription = user.subscribe(async (auth) => {
   //   if (!auth) {
   //     navigate("/auth/login");
@@ -183,6 +186,12 @@
            <Route path="create-faq" component={CreateFaq} />
    
            <Route path="faqs" component={Faqs} />
+                <!-- Reviews -->
+                <Route path="update-review/:reviewId" component={UpdateReview} />
+
+                <Route path="create-review" component={CreateReview} />
+        
+                <Route path="reviews" component={Reviews} />
       </Router>
 
       <FooterAdmin />

@@ -63,6 +63,8 @@
     { key: "form_header2", customValue: null },
     { key: "form_button", customValue: null },
     { key: "form_sent", customValue: null },
+    { key: "read_more", customValue: null },
+    { key: "posted_on", customValue: null },
 
 
 
@@ -659,6 +661,38 @@
                 bind:value={translate.book_an_appointment.value}
                 bind:isValid={translate.book_an_appointment.isValid}
                 placeholder={"Free Consultation"}
+                required={true}
+              />
+            </div>
+          </div>
+          <div class="w-full lg:w-3/12 px-4">
+            <div class="relative w-full mb-3">
+              <label
+                class="block  text-blueGray-600 text-xs font-bold mb-2"
+                for="grid-name"
+              >
+                Daha Fazla
+              </label>
+              <Input
+                bind:value={translate.read_more.value}
+                bind:isValid={translate.read_more.isValid}
+                placeholder={"Read More"}
+                required={true}
+              />
+            </div>
+          </div>
+          <div class="w-full lg:w-3/12 px-4">
+            <div class="relative w-full mb-3">
+              <label
+                class="block  text-blueGray-600 text-xs font-bold mb-2"
+                for="grid-name"
+              >
+                Yayınlanan Yer
+              </label>
+              <Input
+                bind:value={translate.posted_on.value}
+                bind:isValid={translate.posted_on.isValid}
+                placeholder={"Posted on"}
                 required={true}
               />
             </div>

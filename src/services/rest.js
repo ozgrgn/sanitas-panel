@@ -170,7 +170,7 @@ const deleteAbout = (aboutId) => {
 };
 
 // Treatments
-const getTreatments = (limit, skip, lang, isActive, hp,group) => {
+const getTreatments = (limit, skip, lang, isActive, hp, group) => {
   let data = {};
   if (limit) {
     data.limit = limit;
@@ -276,7 +276,7 @@ const deleteGroup = (groupId) => {
 };
 
 // Faqs
-const getFaqs = (limit, skip, lang, isActive, treatment,general) => {
+const getFaqs = (limit, skip, lang, isActive, treatment, general) => {
   let data = {};
   if (limit) {
     data.limit = limit;
@@ -314,6 +314,45 @@ const deleteFaq = (faqId) => {
   return Http.delete(`${ENV.API_URL}/faq/${faqId}`);
 };
 
+
+// Reviews
+const getReviews = (limit, skip, lang, isActive, treatment, general) => {
+  let data = {};
+  if (limit) {
+    data.limit = limit;
+  }
+  if (skip) {
+    data.skip = skip;
+  }
+  if (lang) {
+    data.lang = lang;
+  }
+  if (isActive) {
+    data.isActive = isActive;
+  }
+  if (treatment) {
+    data.treatment = treatment;
+  }
+  if (general) {
+    data.general = general;
+  }
+  return Http.get(`${ENV.API_URL}/review`, { ...data });
+};
+const addReview = (data) => {
+  return Http.post(`${ENV.API_URL}/review`, data);
+};
+
+const updateReview = (reviewId, data) => {
+  return Http.put(`${ENV.API_URL}/review/${reviewId}`, {
+    review: data,
+  });
+};
+const getReview = (reviewId) => {
+  return Http.get(`${ENV.API_URL}/review/${reviewId}`);
+};
+const deleteReview = (reviewId) => {
+  return Http.delete(`${ENV.API_URL}/review/${reviewId}`);
+};
 // Contacts
 const getContacts = (limit, skip, lang) => {
   let data = {};
@@ -530,19 +569,25 @@ export default {
   updateTreatment,
   deleteTreatment,
   getTreatmentViaPerma,
-  
+
   //group
   getGroups,
   getGroup,
   addGroup,
   updateGroup,
   deleteGroup,
-    //faq
-    getFaqs,
-    getFaq,
-    addFaq,
-    updateFaq,
-    deleteFaq,
+  //faq
+  getFaqs,
+  getFaq,
+  addFaq,
+  updateFaq,
+  deleteFaq,
+  //reviews
+  getReviews,
+  getReview,
+  addReview,
+  updateReview,
+  deleteReview,
   //contact
   getContacts,
   getContact,
