@@ -185,8 +185,9 @@
                   required={true}
                 />
               </div>
-            </div>
+            </div>  
           </div>
+        {/if}
           <div class="flex flex-wrap my-4">
             <div class="w-full lg:w-6/12 px-4">
               <div class="relative w-full mb-3">
@@ -204,6 +205,7 @@
                 />
               </div>
             </div>
+            {#if group.department.value}
             <div class="w-full lg:w-6/12 px-4">
               <div class=" relative w-full h-40 mb-3">
                 <label
@@ -220,7 +222,9 @@
                 </div>
               </div>
             </div>
+            {/if}
           </div>
+          {#if group.department.value}
           <div class="flex flex-wrap">
             <div class="w-full lg:w-12/12 px-4">
               <div class="relative w-full mb-3">

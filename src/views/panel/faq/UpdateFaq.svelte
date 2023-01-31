@@ -231,7 +231,7 @@
               <Input
                 bind:value={faq.question.value}
                 bind:isValid={faq.question.isValid}
-                placeholder={"Tedavi İsmi"}
+                placeholder={"Soru"}
                 required={true}
               />
             </div>
