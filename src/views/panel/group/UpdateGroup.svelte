@@ -3,6 +3,7 @@
   import Image from "$components/Form/Image.svelte";
   import ImageArray from "$components/Form/ImageArray.svelte";
   import Input from "$components/Form/Input.svelte";
+  import NumberInput from "$components/Form/NumberInput.svelte";
   import Select from "$components/Form/Select.svelte";
   import Textarea from "$components/Form/Textarea.svelte";
   import TextEditor from "$components/Form/TextEditor.svelte";
@@ -45,7 +46,9 @@
     { key: "svg", customValue: null },
     { key: "perma", customValue: null },
     { key: "text", customValue: null },
-    { key: "image", customValue: null },
+    { key: "image", customValue: null },    
+    { key: "order", customValue: null },
+
   ];
   const getLangs = async () => {
     let response = await RestService.getLangs(undefined, undefined);
@@ -160,6 +163,22 @@
                   customClass={"w-full"}
                 />
               {/if}
+            </div>
+          </div>
+          <div class="w-full lg:w-2/12 px-4">
+            <div class="relative w-full mb-3">
+              <label
+                class="block  text-blueGray-600 text-xs font-bold mb-2"
+                for="grid-name"
+              >
+                Sıra
+              </label>
+              <NumberInput
+                bind:value={group.order.value}
+                bind:isValid={group.order.isValid}
+                placeholder={"Sıra"}
+                required={true}
+              />
             </div>
           </div>
           <div class="w-full lg:w-3/12 px-4">

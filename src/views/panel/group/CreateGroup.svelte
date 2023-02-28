@@ -10,6 +10,7 @@
   import TextEditor from "$components/Form/TextEditor.svelte";
   import Image from "$components/Form/Image.svelte";
   import Switch from "$components/Switch.svelte";
+  import NumberInput from "$components/Form/NumberInput.svelte";
 
   let values = [
     { key: "lang", customValue: null },
@@ -21,6 +22,8 @@
     { key: "perma", customValue: null },
     { key: "text", customValue: null },
     { key: "image", customValue: null },
+    { key: "order", customValue: null },
+
   ];
 
   let group = {};
@@ -101,6 +104,22 @@
                   customClass={"w-full"}
                 />
               {/if}
+            </div>
+          </div>
+          <div class="w-full lg:w-2/12 px-4">
+            <div class="relative w-full mb-3">
+              <label
+                class="block  text-blueGray-600 text-xs font-bold mb-2"
+                for="grid-name"
+              >
+                Sıra
+              </label>
+              <NumberInput
+                bind:value={group.order.value}
+                bind:isValid={group.order.isValid}
+                placeholder={"Sıra"}
+                required={true}
+              />
             </div>
           </div>
           <div class="w-full lg:w-3/12 px-4">
