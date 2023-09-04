@@ -122,6 +122,42 @@
               </a>
               <a
               class="text-white font-semibold text-sm {$location.pathname.indexOf(
+                'about'
+              ) !== -1
+                ? 'hover:text-white text-base'
+                : 'text-white/80 hover:text-white'}"
+              href="/panel/healths"
+              use:link
+              on:click={() => (navbarOpen = false)}
+            >
+              Health Tourism
+            </a>
+            <a
+            class="text-white font-semibold text-sm {$location.pathname.indexOf(
+              'about'
+            ) !== -1
+              ? 'hover:text-white text-base'
+              : 'text-white/80 hover:text-white'}"
+            href="/panel/steps"
+            use:link
+            on:click={() => (navbarOpen = false)}
+          >
+            Adımlar
+          </a>
+              <a
+              class="text-white font-semibold text-sm {$location.pathname.indexOf(
+                'referenceLogo'
+              ) !== -1
+                ? 'hover:text-white text-base'
+                : 'text-white/80 hover:text-white'}"
+              href="/panel/referenceLogos"
+              use:link
+              on:click={() => (navbarOpen = false)}
+            >
+              Referans Logoları
+            </a>
+              <a
+              class="text-white font-semibold text-sm {$location.pathname.indexOf(
                 'group'
               ) !== -1
                 ? 'hover:text-white text-base'

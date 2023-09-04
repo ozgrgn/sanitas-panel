@@ -1,5 +1,6 @@
 <script>
   import Alert from "$components/Alert.svelte";
+  import Image from "$components/Form/Image.svelte";
   import ImageArray from "$components/Form/ImageArray.svelte";
   import Input from "$components/Form/Input.svelte";
   import Select from "$components/Form/Select.svelte";
@@ -10,13 +11,13 @@
   import ToastService from "$services/toast";
   import { navigate, useParams } from "svelte-navigator";
   import { bind } from "svelte-simple-modal";
-  const deleteAboutApprove = (aboutId) => {
+  const deleteStepApprove = (stepId) => {
     modal.set(
       bind(Alert, {
         message: "Bu işlemi onaylıyor musunuz ?",
         answer: (message) => {
           if (message) {
-            deleteAbout(aboutId);
+            deleteStep(stepId);
           }
           modal.set(null);
         },
@@ -26,78 +27,71 @@
 
   const params = useParams();
 
-  let deleteImage = (index) => {
-    about.images.splice(index, 1);
-    about.images = about.images;
-  };
-  let deleteLogo = (index) => {
-    about.logos.splice(index, 1);
-    about.logos = about.logos;
-  };
-  let about;
+
+  let step;
   let langs = [];
-  let images = [];
+
 
   let values = [
     { key: "lang", customValue: null },
-    { key: "about_title", customValue: null },
-    { key: "about_left", customValue: null },
-    { key: "about_right", customValue: null },
-    { key: "about_subTitle1", customValue: null },
-    { key: "about_subTitle2", customValue: null },
-    { key: "images", customValue: null },
+    { key: "title", customValue: null },
+    { key: "description", customValue: null },
+    { key: "svg", customValue: null },
+    { key: "perma", customValue: null },
+    { key: "text", customValue: null },
+    { key: "image", customValue: null },
   ];
-  const getLang = async () => {
+  const getLangs = async () => {
     let response = await RestService.getLangs(undefined, undefined);
     langs = response["langs"];
     console.log(langs, "langs");
   };
-  getLang();
-  const updateAbout = async () => {
-    let editedAbout = {};
-    editedAbout.images = about.images;
-    editedAbout.logos = about.logos;
+  getLangs();
+  const updateStep = async () => {
+    let editedStep = {};
+    editedStep.images = step.images;
+    editedStep.logos = step.logos;
     values.map((v) => {
-      editedAbout[v.key] = about[v.key].value;
+      editedStep[v.key] = step[v.key].value;
     });
 
-    let response = await RestService.updateAbout(about._id, editedAbout);
+    let response = await RestService.updateStep(step._id, editedStep);
     if (response["status"]) {
       ToastService.success($Translate("Successfully-completed"));
-      navigate("/panel/abouts");
+      navigate("/panel/steps");
     } else {
       ToastService.error($TranslateApiMessage(response.message));
     }
   };
 
-  const getAbout = async () => {
-    let response = await RestService.getAbout($params.aboutId);
+  const getStep = async () => {
+    let response = await RestService.getStep($params.stepId);
 
     if (response["status"]) {
       values.map((v) => {
         if (v.customValue) {
-          response["about"][v.key] = {
-            value: response["about"][v.key][v.customValue],
+          response["step"][v.key] = {
+            value: response["step"][v.key][v.customValue],
           };
         } else {
-          response["about"][v.key] = { value: response["about"][v.key] };
+          response["step"][v.key] = { value: response["step"][v.key] };
         }
       });
-      about = {
-        ...response["about"],
+      step = {
+        ...response["step"],
       };
     } else {
       ToastService.error($TranslateApiMessage(response.message));
     }
   };
 
-  getAbout();
+  getStep();
 
-  const deleteAbout = async (aboutId) => {
-    let response = await RestService.deleteAbout(aboutId);
+  const deleteStep = async (stepId) => {
+    let response = await RestService.deleteStep(stepId);
     if (response["status"]) {
       ToastService.success("İşlem başarılı");
-      navigate("/panel/abouts");
+      navigate("/panel/steps");
     } else {
       ToastService.success("İşlem başarılı");
     }
@@ -111,7 +105,7 @@
         class="bg-white text-blue-600 hover:text-red-700 mb-2 border rounded font-bold text-xs px-4 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 "
         type="button"
         on:click={() => {
-          navigate("/panel/abouts");
+          navigate("/panel/steps");
         }}
       >
         <i class="fa fa-arrow-left" />
@@ -121,7 +115,7 @@
       <button
         class="bg-white text-blue-600 hover:text-red-700 mb-2 border rounded font-bold text-xs px-4 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 "
         type="button"
-        on:click={() => deleteAboutApprove($params.aboutId)}
+        on:click={() => deleteStepApprove($params.stepId)}
       >
         <i class="fa fa-trash" />
         Sil
@@ -134,13 +128,13 @@
       <div class="rounded-t mb-0 px-4 py-3 border-0">
         <div class="text-center flex justify-between">
           <h3 class="font-semibold text-lg text-blueGray-700">
-            About güncelle
+            Adım güncelle
           </h3>
         </div>
       </div>
       <div class="flex-auto px-4 lg:px-10 py-10 pt-0">
-        {#if about}
-         <div class="flex flex-wrap my-4">
+        {#if step}
+        <div class="flex flex-wrap my-4">
           <div class="w-full lg:w-3/12 px-4">
             <div class="relative w-full mb-3">
               <label
@@ -149,21 +143,22 @@
               >
                 Dil
               </label>
+              {#if langs}
               <Select
-                bind:value={about.lang.value}
-                bind:isValid={about.lang.isValid}
+                bind:value={step.lang.value}
+                bind:isValid={step.lang.isValid}
                 values={langs}
                 title={"Dil Seçin"}
                 valuesKey={"lang"}
                 valuesTitleKey={"title"}
                 customClass={"w-full"}
               />
+              {/if}
             </div>
           </div>
         </div>
         <div class="flex flex-wrap my-4">
-          <div class="w-full lg:w-6/12 px-4">
-            <div class="w-full lg:w-12/12">
+          <div class="w-full lg:w-3/12 px-4">
             <div class="relative w-full mb-3">
               <label
                 class="block  text-blueGray-600 text-xs font-bold mb-2"
@@ -172,43 +167,14 @@
                 Başlık
               </label>
               <Input
-                bind:value={about.about_title.value}
-                bind:isValid={about.about_title.isValid}
-                placeholder={"Hakkımızda Başlık"}
+                bind:value={step.title.value}
+                bind:isValid={step.title.isValid}
+                placeholder={"Adım Başlığı"}
                 required={true}
               />
             </div>
-            <div class="relative w-full mb-3">
-              <label
-                class="block  text-blueGray-600 text-xs font-bold mb-2"
-                for="grid-name"
-              >
-               Alt Başlık 1
-              </label>
-              <Input
-                bind:value={about.about_subTitle1.value}
-                bind:isValid={about.about_subTitle1.isValid}
-                placeholder={"Welcome To"}
-                required={false}
-              />
-            </div>
-            <div class="relative w-full mb-3">
-              <label
-                class="block  text-blueGray-600 text-xs font-bold mb-2"
-                for="grid-name"
-              >
-               Alt Başlık 2
-              </label>
-              <Input
-                bind:value={about.about_subTitle2.value}
-                bind:isValid={about.about_subTitle2.isValid}
-                placeholder={"Sanitas Health Travel"}
-                required={false}
-              />
-            </div>
-            </div>
           </div>
-          <div class="w-full lg:w-6/12 px-4">
+          <div class="w-full lg:w-7/12 px-4">
             <div class="relative w-full mb-3">
               <label
                 class="block  text-blueGray-600 text-xs font-bold mb-2"
@@ -216,36 +182,89 @@
               >
                 Kısa Açıklama
               </label>
-
-              <Textarea
-                placeholder={"Kısa Açıklama Yukarısı İçin"}
-                bind:value={about.about_left.value}
+              <Input
+                bind:value={step.description.value}
+                bind:isValid={step.description.isValid}
+                placeholder={"Kısa Açıklama"}
+                required={true}
               />
             </div>
           </div>
+          <div class="w-full lg:w-2/12 px-4">
+            <div class="relative w-full mb-3">
+              <label
+                class="block  text-blueGray-600 text-xs font-bold mb-2"
+                for="grid-name"
+              >
+                Perma (url path)
+              </label>
+              <Input
+                bind:value={step.perma.value}
+                bind:isValid={step.perma.isValid}
+                placeholder={"Yönlenecek sayfa"}
+                required={false}
+              />
+            </div>
+          </div>
+        </div>
+        <div class="flex flex-wrap my-4">
+          <div class="w-full lg:w-6/12 px-4">
+            <div class="relative w-full mb-3">
+              <label
+                class="block  text-blueGray-600 text-xs font-bold mb-2"
+                for="grid-name"
+              >
+                SVG Kodu
+              </label>
+              <Textarea
+                bind:value={step.svg.value}
+                bind:isValid={step.svg.isValid}
+                placeholder={"SVG Kodu"}
+                required={true}
+              />
+            </div>
+          </div>
+          <div class="w-full lg:w-6/12 px-4">
+            <div class=" relative w-full h-40 mb-3">
+              <label
+                class="block text-blueGray-600 text-xs font-bold mb-2"
+                for="backgroundBanner"
+              >
+                Sayfası var ise resim
+              </label>
+              <div class="flex h-full border flex-col justify-center my-2">
+                <Image
+                  bind:value={step.image.value}
+                  bind:isValid={step.image.isValid}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="flex flex-wrap">
           <div class="w-full lg:w-12/12 px-4">
             <div class="relative w-full mb-3">
               <label
                 class="block  text-blueGray-600 text-xs font-bold mb-2"
                 for="grid-name"
               >
-                Uzun Açıklama
+                Sayfası var ise text
               </label>
+
               <TextEditor
-                placeholder={"Uzun Açıklama Sayfanın Altı İçin"}
-                bind:value={about.about_right.value}
-                bind:incomingValue={about.about_right.value}
+                placeholder={"Test"}
+                bind:value={step.text.value}
+                bind:incomingValue={step.text.value}
 
               />
             </div>
           </div>
         </div>
-      
           <div class="flex flex-wrap">
             <div class="w-full lg:w-12/12 px-4 text-right mt-5">
               <button
-                on:click={() => updateAbout()}
-                disabled={!about.lang.isValid }
+                on:click={() => updateStep()}
+                disabled={!step.lang.isValid }
                 class="bg-blue-600 disabled:bg-red-300 text-white active:bg-bred-400 font-bold  text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 "
                 type="button"
               >

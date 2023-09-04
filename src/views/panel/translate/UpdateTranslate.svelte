@@ -65,6 +65,7 @@
     { key: "form_sent", customValue: null },
     { key: "read_more", customValue: null },
     { key: "posted_on", customValue: null },
+    { key: "health_tourism", customValue: null },
 
 
 
@@ -693,6 +694,22 @@
                 bind:value={translate.posted_on.value}
                 bind:isValid={translate.posted_on.isValid}
                 placeholder={"Posted on"}
+                required={true}
+              />
+            </div>
+          </div>
+          <div class="w-full lg:w-3/12 px-4">
+            <div class="relative w-full mb-3">
+              <label
+                class="block  text-blueGray-600 text-xs font-bold mb-2"
+                for="grid-name"
+              >
+                Sağlık Turizmi
+              </label>
+              <Input
+                bind:value={translate.health_tourism.value}
+                bind:isValid={translate.health_tourism.isValid}
+                placeholder={"Health Tourism"}
                 required={true}
               />
             </div>

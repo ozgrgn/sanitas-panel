@@ -316,6 +316,8 @@
                 <TextEditor
                   placeholder={"Text"}
                   bind:value={group.text.value}
+                  bind:incomingValue={group.text.value}
+
                 />
               </div>
             </div>

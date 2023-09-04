@@ -12,14 +12,14 @@
 
   let values = [
     { key: "lang", customValue: null },
-    { key: "about_title", customValue: null },
-    { key: "about_left", customValue: null },
-    { key: "about_right", customValue: null },
+    { key: "health_title", customValue: null },
+    { key: "health_left", customValue: null },
+    { key: "health_right", customValue: null },
     
     { key: "images", customValue: null },
   ];
 
-  let about = {};
+  let health = {};
   let langs = [];
   let images = [];
   let deleteImage = (index) => {
@@ -38,26 +38,26 @@
   getLangs();
   values.map((v) => {
     if (v.defaultValue) {
-      about[v.key] = { value: v.defaultValue };
+      health[v.key] = { value: v.defaultValue };
     } else {
-      about[v.key] = {};
+      health[v.key] = {};
     }
   });
 
-  const addAbout = async () => {
+  const addHealth = async () => {
     let data = {};
     data.images = images;
     data.logos = logos;
     values.map((v) => {
-      if (about[v.key].value) {
-        data[v.key] = about[v.key]?.value;
+      if (health[v.key].value) {
+        data[v.key] = health[v.key]?.value;
       }
     });
-    let response = await RestService.addAbout(data);
+    let response = await RestService.addHealth(data);
     if (response["status"]) {
       ToastService.success($Translate("Successfully-completed"));
 
-      navigate("/panel/abouts");
+      navigate("/panel/healths");
     } else {
       ToastService.error($TranslateApiMessage(response.message));
     }
@@ -70,7 +70,7 @@
       class="bg-white text-blue-600 hover:text-red-700 mb-2 border rounded font-bold  text-xs px-4 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 "
       type="button"
       on:click={() => {
-        navigate("/panel/abouts");
+        navigate("/panel/healths");
       }}
     >
       <i class="fa fa-arrow-left" />
@@ -82,7 +82,7 @@
       <div class="rounded-t mb-0 px-4 py-3 border-0">
         <div class="text-center flex justify-between">
           <h3 class="font-semibold text-lg text-blueGray-700">
-            Hakkımızda ekle
+            Health ekle
           </h3>
         </div>
       </div>
@@ -97,8 +97,8 @@
                 Dil
               </label>
               <Select
-                bind:value={about.lang.value}
-                bind:isValid={about.lang.isValid}
+                bind:value={health.lang.value}
+                bind:isValid={health.lang.isValid}
                 values={langs}
                 title={"Dil Seçin"}
                 valuesKey={"lang"}
@@ -118,9 +118,9 @@
                 Başlık
               </label>
               <Input
-                bind:value={about.about_title.value}
-                bind:isValid={about.about_title.isValid}
-                placeholder={"Hakkımızda Başlık"}
+                bind:value={health.health_title.value}
+                bind:isValid={health.health_title.isValid}
+                placeholder={"Health Başlık"}
                 required={true}
               />
             </div>
@@ -136,7 +136,7 @@
 
               <Textarea
                 placeholder={"Kısa Açıklama Yukarısı İçin"}
-                bind:value={about.about_left.value}
+                bind:value={health.health_left.value}
               />
             </div>
           </div>
@@ -150,7 +150,7 @@
               </label>
               <TextEditor
                 placeholder={"Uzun Açıklama Sayfanın Altı İçin"}
-                bind:value={about.about_right.value}
+                bind:value={health.health_right.value}
               />
             </div>
           </div>
@@ -159,8 +159,8 @@
         <div class="flex flex-wrap">
           <div class="w-full lg:w-12/12 px-4 text-right mt-2">
             <button
-              on:click={addAbout}
-              disabled={!about.lang.isValid || about.lang.value == null}
+              on:click={addHealth}
+              disabled={!health.lang.isValid || health.lang.value == null}
               class="bg-blue-600 disabled:bg-red-300 text-white active:bg-bred-400 font-bold  text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 "
               type="button"
             >

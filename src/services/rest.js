@@ -129,13 +129,105 @@ const updateFeature = (featureId, data) => {
   });
 };
 
-
 const getFeature = (featureId) => {
   return Http.get(`${ENV.API_URL}/feature/${featureId}`);
 };
 
 const deleteFeature = (featureId) => {
   return Http.delete(`${ENV.API_URL}/feature/${featureId}`);
+};
+//STEPS
+const getSteps = (limit, skip, lang) => {
+  let data = {};
+  if (limit) {
+    data.limit = limit;
+  }
+  if (skip) {
+    data.skip = skip;
+  }
+  if (lang) {
+    data.lang = lang;
+  }
+  return Http.get(`${ENV.API_URL}/step`, { ...data });
+};
+const addStep = (data) => {
+  return Http.post(`${ENV.API_URL}/step`, data);
+};
+
+const updateStep = (stepId, data) => {
+  return Http.put(`${ENV.API_URL}/step/${stepId}`, {
+    step: data,
+  });
+};
+
+const getStep = (stepId) => {
+  return Http.get(`${ENV.API_URL}/step/${stepId}`);
+};
+
+const deleteStep = (stepId) => {
+  return Http.delete(`${ENV.API_URL}/step/${stepId}`);
+};
+//STEPS
+const getHealths = (limit, skip, lang) => {
+  let data = {};
+  if (limit) {
+    data.limit = limit;
+  }
+  if (skip) {
+    data.skip = skip;
+  }
+  if (lang) {
+    data.lang = lang;
+  }
+  return Http.get(`${ENV.API_URL}/health`, { ...data });
+};
+const addHealth = (data) => {
+  return Http.post(`${ENV.API_URL}/health`, data);
+};
+
+const updateHealth = (healthId, data) => {
+  return Http.put(`${ENV.API_URL}/health/${healthId}`, {
+    health: data,
+  });
+};
+
+const getHealth = (healthId) => {
+  return Http.get(`${ENV.API_URL}/health/${healthId}`);
+};
+
+const deleteHealth = (healthId) => {
+  return Http.delete(`${ENV.API_URL}/health/${healthId}`);
+};
+//
+const getReferenceLogos = (limit, skip, lang) => {
+  let data = {};
+  if (limit) {
+    data.limit = limit;
+  }
+  if (skip) {
+    data.skip = skip;
+  }
+  if (lang) {
+    data.lang = lang;
+  }
+  return Http.get(`${ENV.API_URL}/referenceLogo`, { ...data });
+};
+const addReferenceLogo = (data) => {
+  return Http.post(`${ENV.API_URL}/referenceLogo`, data);
+};
+
+const updateReferenceLogo = (referenceLogoId, data) => {
+  return Http.put(`${ENV.API_URL}/referenceLogo/${referenceLogoId}`, {
+    referenceLogo: data,
+  });
+};
+
+const getReferenceLogo = (referenceLogoId) => {
+  return Http.get(`${ENV.API_URL}/referenceLogo/${referenceLogoId}`);
+};
+
+const deleteReferenceLogo = (referenceLogoId) => {
+  return Http.delete(`${ENV.API_URL}/referenceLogo/${referenceLogoId}`);
 };
 // Abouts
 const getAbouts = (limit, skip, lang) => {
@@ -313,7 +405,6 @@ const getFaq = (faqId) => {
 const deleteFaq = (faqId) => {
   return Http.delete(`${ENV.API_URL}/faq/${faqId}`);
 };
-
 
 // Reviews
 const getReviews = (limit, skip, lang, isActive, treatment, general) => {
@@ -547,7 +638,24 @@ export default {
   addFeature,
   updateFeature,
   deleteFeature,
-
+  //Health
+  getHealths,
+  getHealth,
+  addHealth,
+  updateHealth,
+  deleteHealth,
+  //Step
+  getSteps,
+  getStep,
+  addStep,
+  updateStep,
+  deleteStep,
+  //ReferenceLogo
+  getReferenceLogos,
+  getReferenceLogo,
+  addReferenceLogo,
+  updateReferenceLogo,
+  deleteReferenceLogo,
   //about
   getAbouts,
   getAbout,

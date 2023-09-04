@@ -10,13 +10,13 @@
   import ToastService from "$services/toast";
   import { navigate, useParams } from "svelte-navigator";
   import { bind } from "svelte-simple-modal";
-  const deleteAboutApprove = (aboutId) => {
+  const deleteHealthApprove = (healthId) => {
     modal.set(
       bind(Alert, {
         message: "Bu işlemi onaylıyor musunuz ?",
         answer: (message) => {
           if (message) {
-            deleteAbout(aboutId);
+            deleteHealth(healthId);
           }
           modal.set(null);
         },
@@ -27,24 +27,24 @@
   const params = useParams();
 
   let deleteImage = (index) => {
-    about.images.splice(index, 1);
-    about.images = about.images;
+    health.images.splice(index, 1);
+    health.images = health.images;
   };
   let deleteLogo = (index) => {
-    about.logos.splice(index, 1);
-    about.logos = about.logos;
+    health.logos.splice(index, 1);
+    health.logos = health.logos;
   };
-  let about;
+  let health;
   let langs = [];
   let images = [];
 
   let values = [
     { key: "lang", customValue: null },
-    { key: "about_title", customValue: null },
-    { key: "about_left", customValue: null },
-    { key: "about_right", customValue: null },
-    { key: "about_subTitle1", customValue: null },
-    { key: "about_subTitle2", customValue: null },
+    { key: "health_title", customValue: null },
+    { key: "health_left", customValue: null },
+    { key: "health_right", customValue: null },
+    { key: "health_subTitle1", customValue: null },
+    { key: "health_subTitle2", customValue: null },
     { key: "images", customValue: null },
   ];
   const getLang = async () => {
@@ -53,51 +53,51 @@
     console.log(langs, "langs");
   };
   getLang();
-  const updateAbout = async () => {
-    let editedAbout = {};
-    editedAbout.images = about.images;
-    editedAbout.logos = about.logos;
+  const updateHealth = async () => {
+    let editedHealth = {};
+    editedHealth.images = health.images;
+    editedHealth.logos = health.logos;
     values.map((v) => {
-      editedAbout[v.key] = about[v.key].value;
+      editedHealth[v.key] = health[v.key].value;
     });
 
-    let response = await RestService.updateAbout(about._id, editedAbout);
+    let response = await RestService.updateHealth(health._id, editedHealth);
     if (response["status"]) {
       ToastService.success($Translate("Successfully-completed"));
-      navigate("/panel/abouts");
+      navigate("/panel/healths");
     } else {
       ToastService.error($TranslateApiMessage(response.message));
     }
   };
 
-  const getAbout = async () => {
-    let response = await RestService.getAbout($params.aboutId);
+  const getHealth = async () => {
+    let response = await RestService.getHealth($params.healthId);
 
     if (response["status"]) {
       values.map((v) => {
         if (v.customValue) {
-          response["about"][v.key] = {
-            value: response["about"][v.key][v.customValue],
+          response["health"][v.key] = {
+            value: response["health"][v.key][v.customValue],
           };
         } else {
-          response["about"][v.key] = { value: response["about"][v.key] };
+          response["health"][v.key] = { value: response["health"][v.key] };
         }
       });
-      about = {
-        ...response["about"],
+      health = {
+        ...response["health"],
       };
     } else {
       ToastService.error($TranslateApiMessage(response.message));
     }
   };
 
-  getAbout();
+  getHealth();
 
-  const deleteAbout = async (aboutId) => {
-    let response = await RestService.deleteAbout(aboutId);
+  const deleteHealth = async (healthId) => {
+    let response = await RestService.deleteHealth(healthId);
     if (response["status"]) {
       ToastService.success("İşlem başarılı");
-      navigate("/panel/abouts");
+      navigate("/panel/healths");
     } else {
       ToastService.success("İşlem başarılı");
     }
@@ -111,7 +111,7 @@
         class="bg-white text-blue-600 hover:text-red-700 mb-2 border rounded font-bold text-xs px-4 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 "
         type="button"
         on:click={() => {
-          navigate("/panel/abouts");
+          navigate("/panel/healths");
         }}
       >
         <i class="fa fa-arrow-left" />
@@ -121,7 +121,7 @@
       <button
         class="bg-white text-blue-600 hover:text-red-700 mb-2 border rounded font-bold text-xs px-4 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 "
         type="button"
-        on:click={() => deleteAboutApprove($params.aboutId)}
+        on:click={() => deleteHealthApprove($params.healthId)}
       >
         <i class="fa fa-trash" />
         Sil
@@ -134,12 +134,12 @@
       <div class="rounded-t mb-0 px-4 py-3 border-0">
         <div class="text-center flex justify-between">
           <h3 class="font-semibold text-lg text-blueGray-700">
-            About güncelle
+            Health güncelle
           </h3>
         </div>
       </div>
       <div class="flex-auto px-4 lg:px-10 py-10 pt-0">
-        {#if about}
+        {#if health}
          <div class="flex flex-wrap my-4">
           <div class="w-full lg:w-3/12 px-4">
             <div class="relative w-full mb-3">
@@ -150,8 +150,8 @@
                 Dil
               </label>
               <Select
-                bind:value={about.lang.value}
-                bind:isValid={about.lang.isValid}
+                bind:value={health.lang.value}
+                bind:isValid={health.lang.isValid}
                 values={langs}
                 title={"Dil Seçin"}
                 valuesKey={"lang"}
@@ -172,9 +172,9 @@
                 Başlık
               </label>
               <Input
-                bind:value={about.about_title.value}
-                bind:isValid={about.about_title.isValid}
-                placeholder={"Hakkımızda Başlık"}
+                bind:value={health.health_title.value}
+                bind:isValid={health.health_title.isValid}
+                placeholder={"Health Başlık"}
                 required={true}
               />
             </div>
@@ -186,8 +186,8 @@
                Alt Başlık 1
               </label>
               <Input
-                bind:value={about.about_subTitle1.value}
-                bind:isValid={about.about_subTitle1.isValid}
+                bind:value={health.health_subTitle1.value}
+                bind:isValid={health.health_subTitle1.isValid}
                 placeholder={"Welcome To"}
                 required={false}
               />
@@ -200,8 +200,8 @@
                Alt Başlık 2
               </label>
               <Input
-                bind:value={about.about_subTitle2.value}
-                bind:isValid={about.about_subTitle2.isValid}
+                bind:value={health.health_subTitle2.value}
+                bind:isValid={health.health_subTitle2.isValid}
                 placeholder={"Sanitas Health Travel"}
                 required={false}
               />
@@ -219,7 +219,7 @@
 
               <Textarea
                 placeholder={"Kısa Açıklama Yukarısı İçin"}
-                bind:value={about.about_left.value}
+                bind:value={health.health_left.value}
               />
             </div>
           </div>
@@ -233,8 +233,8 @@
               </label>
               <TextEditor
                 placeholder={"Uzun Açıklama Sayfanın Altı İçin"}
-                bind:value={about.about_right.value}
-                bind:incomingValue={about.about_right.value}
+                bind:value={health.health_right.value}
+                bind:incomingValue={health.health_right.value}
 
               />
             </div>
@@ -244,8 +244,8 @@
           <div class="flex flex-wrap">
             <div class="w-full lg:w-12/12 px-4 text-right mt-5">
               <button
-                on:click={() => updateAbout()}
-                disabled={!about.lang.isValid }
+                on:click={() => updateHealth()}
+                disabled={!health.lang.isValid }
                 class="bg-blue-600 disabled:bg-red-300 text-white active:bg-bred-400 font-bold  text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 "
                 type="button"
               >

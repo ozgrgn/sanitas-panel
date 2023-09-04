@@ -50,6 +50,15 @@
   import UpdateReview from "./reviews/UpdateReview.svelte";
   import CreateReview from "./reviews/CreateReview.svelte";
   import Reviews from "./reviews/Reviews.svelte";
+  import UpdateReferenceLogos from "./referenceLogo/UpdateReferenceLogos.svelte";
+  import CreateReferenceLogos from "./referenceLogo/CreateReferenceLogos.svelte";
+  import ReferenceLogos from "./referenceLogo/ReferenceLogos.svelte";
+  import UpdateHealth from "./health/UpdateHealth.svelte";
+  import CreateHealth from "./health/CreateHealth.svelte";
+  import Healths from "./health/Healths.svelte";
+  import UpdateSteps from "./steps/UpdateSteps.svelte";
+  import CreateSteps from "./steps/CreateSteps.svelte";
+  import Steps from "./steps/Steps.svelte";
   // let userAuthSubscription = user.subscribe(async (auth) => {
   //   if (!auth) {
   //     navigate("/auth/login");
@@ -121,6 +130,16 @@
 
         <Route path="features" component={Features} />
 
+        <!-- Reference Logo -->
+        <Route
+          path="update-referenceLogo/:referenceLogoId"
+          component={UpdateReferenceLogos}
+        />
+
+        <Route path="create-referenceLogo" component={CreateReferenceLogos} />
+
+        <Route path="referenceLogos" component={ReferenceLogos} />
+
         <!-- Hakkımızda -->
         <Route path="update-about/:aboutId" component={UpdateAbout} />
 
@@ -128,6 +147,19 @@
 
         <Route path="abouts" component={Abouts} />
 
+        <!-- Health Tourism -->
+        <Route path="update-health/:healthId" component={UpdateHealth} />
+
+        <Route path="create-health" component={CreateHealth} />
+
+        <Route path="healths" component={Healths} />
+
+        <!-- Steps -->
+        <Route path="update-step/:stepId" component={UpdateSteps} />
+
+        <Route path="create-step" component={CreateSteps} />
+
+        <Route path="steps" component={Steps} />
         <!-- Tedavi-Sayfası -->
         <Route
           path="update-treatmentpage/:treatments_pageId"
@@ -180,18 +212,18 @@
         <Route path="create-group" component={CreateGroup} />
 
         <Route path="groups" component={Groups} />
-           <!-- Faqs -->
-           <Route path="update-faq/:faqId" component={UpdateFaq} />
+        <!-- Faqs -->
+        <Route path="update-faq/:faqId" component={UpdateFaq} />
 
-           <Route path="create-faq" component={CreateFaq} />
-   
-           <Route path="faqs" component={Faqs} />
-                <!-- Reviews -->
-                <Route path="update-review/:reviewId" component={UpdateReview} />
+        <Route path="create-faq" component={CreateFaq} />
 
-                <Route path="create-review" component={CreateReview} />
-        
-                <Route path="reviews" component={Reviews} />
+        <Route path="faqs" component={Faqs} />
+        <!-- Reviews -->
+        <Route path="update-review/:reviewId" component={UpdateReview} />
+
+        <Route path="create-review" component={CreateReview} />
+
+        <Route path="reviews" component={Reviews} />
       </Router>
 
       <FooterAdmin />
